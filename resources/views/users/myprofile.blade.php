@@ -10,8 +10,7 @@
             <div class="sm:w-1/3 text-center sm:py-8 m-4">
 
                 <div class="relative  text-blue-500 ">
-                    <a href='{{ route('myprofile_edit', ['user_id' => $user_data['id']]) }}'
-                        class="text-xs absolute right-0 top-2">プロフィールを編集する
+                    <a href='{{ route('myprofile_edit') }}' class="text-xs absolute right-0 top-2">プロフィールを編集する
                     </a>
                 </div>
                 <div
@@ -41,7 +40,33 @@
                         </tr>
                         <tr>
                             <td class="w-1/3 text-right text-sm text-gray-600 border px-4 py-2">自己紹介</td>
-                            <td class="border px-4 py-2">{{ $user_data['comment'] }}まだ記載されていません</td>
+                            <td class="border px-4 py-2">
+                                @if (isset($user_data['comment']))
+                                    {{ $user_data['comment'] }}
+                                @else
+                                    コメントはまだ記載されていません
+                                @endif
+                            </td>
+                        </tr>
+                        <tr>
+                            <td class="w-1/3 text-right text-sm text-gray-600 border px-4 py-2">利用目的</td>
+                            <td class="w-2/3 border px-4 py-2">
+                                <div class="p-2 w-full flex flex-row">
+                                    <div class="w-1/2">
+                                        <input class="rounded border-gray-300 text-blue-600 shadow-sm" type="checkbox"
+                                            name="giver" value="1" {{ $user_data['giver'] ? 'checked' : '' }}
+                                            onclick="return false;">
+                                        <label for="scales" class="text-sm">魚をあげたい</label>
+                                    </div>
+                                    <div class="w-1/2">
+                                        <input class="rounded border-gray-300 text-blue-600 shadow-sm" type="checkbox"
+                                            name="receiver" value="1" {{ $user_data['receiver'] ? 'checked' : '' }}
+                                            onclick="return false;">
+
+                                        <label for="scales" class="text-sm">魚が欲しい</label>
+                                    </div>
+                                </div>
+                            </td>
                         </tr>
                     </tbody>
                 </table>

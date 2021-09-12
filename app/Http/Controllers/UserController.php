@@ -6,42 +6,42 @@ use App\Models\Content;
 use App\Models\Pickup;
 use App\Models\User;
 use Illuminate\Support\Facades\Storage;
+use App\Http\Services\UserService;
 
 use Illuminate\Http\Request;
+use \Auth;
 
 class UserController extends Controller
 {
-    public function info($user_id)
+    public function info()
     {
         // お知らせ画面
-        $user_get_query = User::select('*');
-        $user_data = $user_get_query->find($user_id)->toArray();
+        $user_data =  UserService::get_profile(Auth::id());
+        // $user_get_query = User::select('*');
+        // $user_data = $user_get_query->find($user_id)->toArray();
 
         return view('users.info', [
             'user_data' => $user_data,
         ]);
     }
 
-    public function mypage($user_id)
+    public function mypage()
     {
         // マイページ
-        $user_get_query = User::select('*');
-        $user_data = $user_get_query->find($user_id)->toArray();
+        $user_data =  UserService::get_profile(Auth::id());
+        // $user_get_query = User::select('*');
+        // $user_data = $user_get_query->find($user_id)->toArray();
 
         return view('users.mypage', [
             'user_data' => $user_data,
         ]);
     }
 
-    public function myprofile($user_id)
+    public function myprofile()
     {
-        $user_get_query = User::select('*');
-        $user_data = $user_get_query->find($user_id)->toArray();
-
-        // echo '<pre>';
-        // var_dump($user_data);
-        // echo '<pre>';
-        // exit;
+        $user_data =  UserService::get_profile(Auth::id());
+        // $user_get_query = User::select('*');
+        // $user_data = $user_get_query->find($user_id)->toArray();
 
 
         return view('users.myprofile', [
@@ -49,10 +49,13 @@ class UserController extends Controller
         ]);
     }
 
-    public function myprofile_edit($user_id)
+    public function myprofile_edit()
     {
-        $user_get_query = User::select('*');
-        $user_data = $user_get_query->find($user_id)->toArray();
+
+
+        $user_data =  UserService::get_profile(Auth::id());
+        // $user_get_query = User::select('*');
+        // $user_data = $user_get_query->find($user_id)->toArray();
 
 
         return view('users.myprofile_edit', [
@@ -60,38 +63,16 @@ class UserController extends Controller
         ]);
     }
 
+    public function myprofile_update(Request $request)
+    {
+        $request->validate([
+            'name' => 'required',
+            'email' => 'required',
 
-    // public function edit($user_id)
-    // {
-    //     $user_get_query = User::select('*');
-    //     $item = $user_get_query->find($user_id);
+        ]);
 
-    //     return view('users.edit', [
-    //         'item' => $item,
-    //     ]);
-    // }
+        UserService::update($request, Auth::id());
 
-    // public function update(Request $request)
-    // {
-    //     $content_get_query = Content::select('*');
-    //     $content_info = $content_get_query->find($request['id']);
-
-    //     // echo $request;
-    //     // exit;
-
-    //     $content_info->content = $request['content'];
-    //     $content_info->save();
-    //     return redirect(route('output'));
-
-
-    //     $title = $request->input('title');
-    //     $place_1 = $request->input('place_1');
-    //     $place_2 = $request->input('place_2');
-    //     $place_3 = $request->input('place_3');
-    //     $limit = $request->input('limit');
-    //     $cool_now = $request->input('cool_now');
-    //     $cool_give = $request->input('cool_give');
-    //     $content = $request->input('content');
-    //     Content::create(compact('title', 'place_1', 'place_2', 'place_3', 'limit', 'cool_now', 'cool_give', 'content'));
-    // }
+        return redirect(route('myprofile'));
+    }
 }

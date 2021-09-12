@@ -11,11 +11,11 @@
                 </div>
 
                 <!-- Navigation Links -->
-                <div class="hidden space-x-8 sm:-my-px sm:ml-10 sm:flex">
+                {{-- <div class="hidden space-x-8 sm:-my-px sm:ml-10 sm:flex">
                     <x-nav-link :href="route('dashboard')" :active="request()->routeIs('dashboard')">
                         {{ __('Top') }}
                     </x-nav-link>
-                </div>
+                </div> --}}
             </div>
 
             <!-- Settings Dropdown -->
@@ -27,8 +27,7 @@
                             <div>{{ Auth::user()->name }}</div>
 
                             <div class="ml-1">
-                                <svg class="fill-current h-4 w-4" xmlns="http://www.w3.org/2000/svg"
-                                    viewBox="0 0 20 20">
+                                <svg class="fill-current h-4 w-4" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 20 20">
                                     <path fill-rule="evenodd"
                                         d="M5.293 7.293a1 1 0 011.414 0L10 10.586l3.293-3.293a1 1 0 111.414 1.414l-4 4a1 1 0 01-1.414 0l-4-4a1 1 0 010-1.414z"
                                         clip-rule="evenodd" />
@@ -38,7 +37,7 @@
                     </x-slot>
 
                     <x-slot name="content">
-                        <x-dropdown-link onClick="href='{{ route('info', ['user_id' => Auth::id()]) }}'">
+                        <x-dropdown-link onClick="href='{{ route('info') }}'">
                             {{ __('お知らせ') }}
                         </x-dropdown-link>
 
@@ -50,7 +49,7 @@
                             {{ __('魚一覧') }}
                         </x-dropdown-link>
 
-                        <x-dropdown-link onClick="href='{{ route('mypage', ['user_id' => Auth::id()]) }}'">
+                        <x-dropdown-link onClick="href='{{ route('mypage') }}'">
                             {{ __('マイページ') }}
                         </x-dropdown-link>
                         <!-- Authentication -->
@@ -103,12 +102,12 @@
 
             <div class="mt-3 space-y-1">
             </div>
-            <x-responsive-nav-link onClick="href='{{ route('info', ['user_id' => Auth::id()]) }}'">
+            <x-responsive-nav-link onClick="href='{{ route('info') }}'">
                 {{ __('お知らせ') }}</x-responsive-nav-link>
             <x-responsive-nav-link onClick="href='{{ route('input') }}'">{{ __('魚を登録') }}</x-responsive-nav-link>
             <x-responsive-nav-link onClick="href='{{ route('output') }}'"> {{ __('魚一覧') }}
             </x-responsive-nav-link>
-            <x-responsive-nav-link onClick="href='{{ route('mypage', ['user_id' => Auth::id()]) }}'">
+            <x-responsive-nav-link onClick="href='{{ route('mypage') }}'">
                 {{ __('マイページ') }} </x-responsive-nav-link>
             <!-- Authentication -->
             <form method="POST" action="{{ route('logout') }}">

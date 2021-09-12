@@ -4,6 +4,7 @@ namespace App\Http\Controllers;
 
 use App\Models\Content;
 use App\Models\Pickup;
+use App\Models\User;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Storage;
 
@@ -38,6 +39,7 @@ class ContentController extends Controller
                 $file_name = $request->file('file')->getClientOriginalName();
                 // ↓適当な名前をつけるputFile
                 //$file_path = Storage::putFile('/images', $request->file('file'), 'public');
+                // 数字で名前をつける
                 $file_path = '';
                 $created_user_id = $request->input('created_user_id');
                 $title = $request->input('title');
@@ -64,9 +66,9 @@ class ContentController extends Controller
                 $process_10 = $request->input('process_10');
                 $cool_now = $request->input('cool_now');
                 $cool_give = $request->input('cool_give');
-                $send_or_not = $request->input('send_or_not');
+                // $send_or_not = $request->input('send_or_not');
                 $content = $request->input('content');
-                $data = Content::create(compact('created_user_id', 'title', 'size', 'fishing_area', 'file_name', 'file_path', 'datetime_1', 'place_1', 'datetime_2', 'place_2', 'datetime_3', 'place_3', 'limit', 'process_1', 'process_2', 'process_3', 'process_4', 'process_5', 'process_6', 'process_7', 'process_8', 'process_9', 'process_10', 'cool_now', 'cool_give', 'send_or_not', 'content'));
+                $data = Content::create(compact('created_user_id', 'title', 'size', 'fishing_area', 'file_name', 'file_path', 'datetime_1', 'place_1', 'datetime_2', 'place_2', 'datetime_3', 'place_3', 'limit', 'process_1', 'process_2', 'process_3', 'process_4', 'process_5', 'process_6', 'process_7', 'process_8', 'process_9', 'process_10', 'cool_now', 'cool_give', 'content'));
 
                 $file_path = Storage::putFileAs('/images', $request->file('file'), $data->id, 'public');
             } else {
@@ -110,6 +112,11 @@ class ContentController extends Controller
         $items = $content_get_query->find($content_id);
         $pickup_items = Pickup::where('fish_id', '=', $content_id)->first();
 
+        $created_user_id = $items['created_user_id'];
+        $created_user_data = User::where('id', '=', $created_user_id)->first();
+
+
+
 
         // echo '<pre>';
         // dd($content_items);
@@ -149,6 +156,8 @@ class ContentController extends Controller
         return view('contents.detail', [
             'item' => $items,
             'pickup_items' => $pickup_items,
+            'created_user_data' => $created_user_data,
+
         ]);
     }
 
@@ -167,23 +176,20 @@ class ContentController extends Controller
         $content_get_query = Content::select('*');
         $content_info = $content_get_query->find($request['id']);
 
-        // echo $request;
-        // exit;
-
         $content_info->content = $request['content'];
         $content_info->save();
         return redirect(route('output'));
 
 
-        $title = $request->input('title');
-        $place_1 = $request->input('place_1');
-        $place_2 = $request->input('place_2');
-        $place_3 = $request->input('place_3');
-        $limit = $request->input('limit');
-        $cool_now = $request->input('cool_now');
-        $cool_give = $request->input('cool_give');
-        $content = $request->input('content');
-        Content::create(compact('title', 'place_1', 'place_2', 'place_3', 'limit', 'cool_now', 'cool_give', 'content'));
+        // $title = $request->input('title');
+        // $place_1 = $request->input('place_1');
+        // $place_2 = $request->input('place_2');
+        // $place_3 = $request->input('place_3');
+        // $limit = $request->input('limit');
+        // $cool_now = $request->input('cool_now');
+        // $cool_give = $request->input('cool_give');
+        // $content = $request->input('content');
+        // Content::create(compact('title', 'place_1', 'place_2', 'place_3', 'limit', 'cool_now', 'cool_give', 'content'));
     }
 
     public function delete(Request $request)

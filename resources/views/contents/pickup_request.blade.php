@@ -23,8 +23,8 @@
                                             <input type="hidden" name="pickup_user_id" value="{{ Auth::id() }}">
                                             <div class="flex justify-center rounded-lg h-40 overflow-hidden border">
                                                 @if (isset($item['file_path']))
-                                                    <img src="{{ asset('storage/' . $item['file_path']) }}"
-                                                        alt="{{ asset('storage/' . $item['file_path']) }}">
+                                                    <img src="{{ asset('storage/images/' . $item['id']) }}"
+                                                        alt="{{ asset('storage/images/' . $item['id']) }}">
                                                 @endif
                                             </div>
                                             <div class="flex flex-col sm:flex-row">

@@ -60,9 +60,11 @@ Route::post('/pickup_request_comfirm', [ContentController::class, 'pickup_reques
 Route::get('/pickup_request_list', [ContentController::class, 'pickup_request_list'])->middleware(['auth'])->name('pickup_request_list');
 Route::get('/pickup_request_detail', [ContentController::class, 'pickup_request_detail'])->middleware(['auth'])->name('pickup_request_detail');
 
-Route::get('/mypage/{user_id}', [UserController::class, 'mypage'])->middleware(['auth'])->name('mypage');
-Route::get('/myprofile/{user_id}', [UserController::class, 'myprofile'])->middleware(['auth'])->name('myprofile');
-Route::get('/myprofile_edit/{user_id}', [UserController::class, 'myprofile_edit'])->middleware(['auth'])->name('myprofile_edit');
-Route::get('/info/{user_id}', [UserController::class, 'info'])->middleware(['auth'])->name('info');
+Route::get('/mypage', [UserController::class, 'mypage'])->middleware(['auth'])->name('mypage');
+Route::get('/myprofile', [UserController::class, 'myprofile'])->middleware(['auth'])->name('myprofile');
+Route::get('/myprofile_edit', [UserController::class, 'myprofile_edit'])->middleware(['auth'])->name('myprofile_edit');
+Route::post('/myprofile_update', [UserController::class, 'myprofile_update'])->middleware(['auth'])->name('myprofile_update');
+Route::get('/info', [UserController::class, 'info'])->middleware(['auth'])->name('info');
+
 
 require __DIR__ . '/auth.php';

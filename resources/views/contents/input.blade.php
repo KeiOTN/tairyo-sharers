@@ -211,7 +211,7 @@
                             </select>
                         </div>
                     </div>
-                    <div class="p-2 w-full flex flex-row">
+                    {{-- <div class="p-2 w-full flex flex-row">
                         <div class="w-1/3"><span
                                 class="text-white bg-blue-400 border-0 py-1 px-2 rounded text-sm">選択</span>
 
@@ -224,7 +224,7 @@
                         <div class="w-1/3"> <input
                                 class="focus:border-blue-500 focus:bg-white focus:ring-2 focus:ring-blue-200"
                                 type="radio" name="send_or_not" value="2"> OK</div>
-                    </div>
+                    </div> --}}
                     <div class="p-2 w-full">
                         <div class="relative">
                             <span class="text-white bg-blue-400 border-0 py-1 px-2 rounded text-sm">任意</span>

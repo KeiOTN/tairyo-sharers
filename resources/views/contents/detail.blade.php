@@ -18,8 +18,8 @@
 
                                         <div class="flex justify-center rounded-lg h-70 overflow-hidden border">
                                             @if (isset($item['file_path']))
-                                                <img src="{{ asset('storage/' . $item['file_path']) }}"
-                                                    alt="{{ asset('storage/' . $item['file_path']) }}">
+                                                <img src="{{ asset('storage/images/' . $item['id']) }}"
+                                                    alt="{{ asset('storage/images/' . $item['id']) }}">
                                             @endif
                                         </div>
                                         <div class="flex flex-col sm:flex-row ">
@@ -184,13 +184,13 @@
                                                     </p>
                                                     {{ config('const.Cool_Give.' . $item['cool_give']) }}
                                                 </div>
-                                                <div class="leading-relaxed text-lg mb-4">
+                                                {{-- <div class="leading-relaxed text-lg mb-4">
                                                     <p
                                                         class="tracking-widest text-xs title-font font-medium text-gray-400 mb-1">
                                                         着払い発送
                                                     </p>{{ config('const.Send_Or_Not.' . $item['send_or_not']) }}
 
-                                                </div>
+                                                </div> --}}
                                                 <div class="leading-relaxed text-lg mb-4">
                                                     <p
                                                         class="tracking-widest text-xs title-font font-medium text-gray-400 mb-1">
@@ -208,21 +208,33 @@
                                             </div>
                                             <div
                                                 class="sm:w-1/3 text-center sm:py-8 sm:border-l border-gray-200 sm:border-t-0 border-t border-b sm:border-b-0 m-4">
-                                                {{ $item['created_user_id'] }}
+                                                {{-- {{ $item['created_user_id'] }} --}}
                                                 <h2
                                                     class="tracking-widest text-xs title-font font-medium text-gray-400 mb-1 text-left pl-4 mt-4">
                                                     出品者</h2>
-                                                <div
-                                                    class="w-20 h-20 rounded-full inline-flex items-center justify-center bg-gray-200 text-gray-400">
-                                                    <svg fill="none" stroke="currentColor" stroke-linecap="round"
-                                                        stroke-linejoin="round" stroke-width="2" class="w-10 h-10"
-                                                        viewBox="0 0 24 24">
-                                                        <path d="M20 21v-2a4 4 0 00-4-4H8a4 4 0 00-4 4v2"></path>
-                                                        <circle cx="12" cy="7" r="4"></circle>
-                                                    </svg>
-                                                </div>
+
+
+                                                @if (isset($created_user_data['file_path']))
+                                                    <div
+                                                        class="w-20 h-20 rounded-full inline-flex items-center justify-center bg-gray-200 text-gray-400">
+                                                        <img src="{{ asset('storage/users/' . $created_user_data['id']) }}"
+                                                            alt="{{ asset('storage/users/' . $created_user_data['id']) }}">
+                                                    </div>
+                                                @else
+                                                    <div
+                                                        class="w-20 h-20 rounded-full inline-flex items-center justify-center bg-gray-200 text-gray-400">
+                                                        <svg fill="none" stroke="currentColor" stroke-linecap="round"
+                                                            stroke-linejoin="round" stroke-width="2"
+                                                            class="w-10 h-10" viewBox="0 0 24 24">
+                                                            <path d="M20 21v-2a4 4 0 00-4-4H8a4 4 0 00-4 4v2"></path>
+                                                            <circle cx="12" cy="7" r="4"></circle>
+                                                        </svg>
+                                                    </div>
+                                                @endif
+
                                                 <div class="flex flex-col items-center text-center justify-center my-4">
-                                                    <h2 class="font-medium title-font mt-4 text-gray-900 text-lg">魚住 太郎
+                                                    <h2 class="font-medium title-font mt-4 text-gray-900 text-lg">
+                                                        {{ $created_user_data['name'] }}
                                                     </h2>
                                                     <div class="w-12 h-1 bg-blue-500 rounded mt-2 mb-4 "></div>
                                                 </div>

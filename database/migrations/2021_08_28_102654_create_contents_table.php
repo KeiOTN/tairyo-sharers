@@ -41,7 +41,7 @@ class CreateContentsTable extends Migration
             $table->string('process_10')->nullable();
             $table->string('cool_now');
             $table->string('cool_give');
-            $table->string('send_or_not');
+            // $table->string('send_or_not');
             $table->string('content')->nullable();
             $table->timestamps();
             $table->softDeletes();
