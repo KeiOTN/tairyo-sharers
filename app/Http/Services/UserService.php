@@ -9,7 +9,11 @@ class UserService
 
     public static function get_profile($user_id)
     {
-        $profile = User::where('id', $user_id);
+        // $profile = User::select('*')->where('id', $user_id)->toArray();
+        $profile = User::select('*')->find($user_id)->toArray();
+        // $user_get_query = User::select('*');
+        // $user_data = $user_get_query->find($user_id)->toArray();
+
         return $profile;
     }
 

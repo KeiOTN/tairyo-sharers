@@ -41,7 +41,7 @@
                         <tr>
                             <td class="w-1/3 text-right text-sm text-gray-600 border px-4 py-2">自己紹介</td>
                             <td class="border px-4 py-2">
-                                @if (isset($user_data['comment']))
+                                @if (null !== $user_data['comment'])
                                     {{ $user_data['comment'] }}
                                 @else
                                     コメントはまだ記載されていません
@@ -70,23 +70,9 @@
                         </tr>
                     </tbody>
                 </table>
-
                 <div>
-
                 </div>
-
-
-
-
-
-
-
-
-
-
             </div>
-
-
         </div>
     </div>
 </x-app-layout>

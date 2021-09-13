@@ -15,10 +15,11 @@ class CreatePickupsTable extends Migration
     {
         Schema::create('pickups', function (Blueprint $table) {
             $table->id();
-            $table->integer('fish_id');
-            $table->integer('pickup_user_id');
-            $table->integer('pickup');
-            $table->string('pickup_detail')->nullable();
+            $table->integer('fish_id');  // =content tableのidと同じ
+            $table->integer('pickup_user_id'); // 希望者
+            $table->integer('pickup'); // 受取条件番号
+            $table->string('pickup_detail')->nullable(); // textarea
+            $table->string('result')->nullable(); // 結果番号
             $table->timestamps();
         });
     }

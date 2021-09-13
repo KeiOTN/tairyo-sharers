@@ -13,14 +13,12 @@
 
                 <section class="text-gray-600 body-font relative">
                     <div class="container px-5 py-12 mx-auto">
-                        <div class="lg:w-1/2 md:w-2/3 mx-auto">
+                        <div class="lg:w-1/2 md:w-2/3 mx-auto flex flex-col">
 
                             {{-- 登録されていた画像を表示 --}}
-                            現在登録されている画像
-                            @if (isset($user_data['file_path']))
-                                <img src="{{ asset('storage/images/' . $user_data['id']) }}"
-                                    alt="{{ asset('storage/images/' . $user_data['id']) }}">
-                            @else
+                            <div>現在登録されている画像</div>
+                            {{-- @if (isset($user_data['file_path'])) --}}
+                            @if ($user_data['file_path'] == '')
                                 <div
                                     class="w-20 h-20 rounded-full inline-flex items-center justify-center bg-gray-200 text-gray-400">
                                     <svg fill="none" stroke="currentColor" stroke-linecap="round"
@@ -30,6 +28,10 @@
                                         <circle cx="12" cy="7" r="4"></circle>
                                     </svg>
                                 </div>
+
+                            @else
+                                <img src="{{ asset('storage/users/' . $user_data['id']) }}"
+                                    alt="{{ asset('storage/users/' . $user_data['id']) }}">
                             @endif
 
                             {{-- 新しい画像をアップロード --}}

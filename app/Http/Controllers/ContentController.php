@@ -7,6 +7,7 @@ use App\Models\Pickup;
 use App\Models\User;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Storage;
+use \DB;
 
 
 class ContentController extends Controller
@@ -103,60 +104,27 @@ class ContentController extends Controller
 
     public function detail($content_id)
     {
-        // 当初の内容
-        // $content_get_query = Content::select('*');
-        // $items = $content_get_query->find($content_id);
-        //
+        $item = Content::select('*')->find($content_id);  // 商品情報
 
-        $content_get_query = Content::select('*');
-        $items = $content_get_query->find($content_id);
-        $pickup_items = Pickup::where('fish_id', '=', $content_id)->first();
+        $pickups = DB::table('pickups')
+            ->join('users', 'users.id', '=', 'pickups.pickup_user_id')
+            ->join('contents', 'contents.id', '=', 'pickups.fish_id')
+            ->select('pickups.*', 'users.name', 'contents.*')
+            ->where('pickups.fish_id', '=', $content_id)
+            ->get();  // 申し込みに関する情報（複数）
+        $count = count($pickups); // 申し込み件数
 
-        $created_user_id = $items['created_user_id'];
+        $created_user_id = $item['created_user_id'];
         $created_user_data = User::where('id', '=', $created_user_id)->first();
-
-
-
-
-        // echo '<pre>';
-        // dd($content_items);
-        // echo '<pre>';
-        // dd($pickup_items);
-        // echo '<pre>';
-        // exit;
-
-
-        // 自分が登録した商品ではないか判定
-        // Auth::user()==$created_user_idのとき
-        // "受託" "お断り" ボタンを設置
-
-        // 自分が既に申込しているとき
-        // 申込はできない
-        //削除ボタン設置 
-
-
-
-
-        // 申し込みがあるか
-        // contents tableの$id  とpickups tableの$fish_id同じものがあるか確認
-        // 申し込みがあるとき
-
-
-
-
-        // 申込がないとき
-        // まだありません
-
-
-
-
-
-
+        // $pickup_user_id = $pickup_items['pickup_user_id'];
+        // $pickup_user_data = User::where('id', '=', $pickup_user_id)->first();
 
         return view('contents.detail', [
-            'item' => $items,
-            'pickup_items' => $pickup_items,
+            'item' => $item,
+            'pickups' => $pickups,
             'created_user_data' => $created_user_data,
+            // 'pickup_user_data' => $pickup_user_data,
+            'count' => $count,
 
         ]);
     }

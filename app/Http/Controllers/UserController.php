@@ -35,6 +35,7 @@ class UserController extends Controller
         return view('users.mypage', [
             'user_data' => $user_data,
         ]);
+        // return redirect(route('mypage'));
     }
 
     public function myprofile()
