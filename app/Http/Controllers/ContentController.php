@@ -109,10 +109,20 @@ class ContentController extends Controller
         $pickups = DB::table('pickups')
             ->join('users', 'users.id', '=', 'pickups.pickup_user_id')
             ->join('contents', 'contents.id', '=', 'pickups.fish_id')
-            ->select('pickups.*', 'users.name', 'contents.*')
+            ->select('pickups.id as pickups_id', 'pickups.fish_id', 'pickups.pickup', 'pickups.pickup_detail', 'pickups.is_answered', 'users.id as users_id', 'users.name', 'contents.*')
             ->where('pickups.fish_id', '=', $content_id)
+            ->where('is_answered', '!=', 1)->orWhereNull('is_answered')
             ->get();  // 申し込みに関する情報（複数）
-        $count = count($pickups); // 申し込み件数
+        $count = count($pickups); // 申し込み件数(未回答)
+
+
+        $pickups_2 = DB::table('pickups')
+            ->join('users', 'users.id', '=', 'pickups.pickup_user_id')
+            ->join('contents', 'contents.id', '=', 'pickups.fish_id')
+            ->where('pickups.fish_id', '=', $content_id)
+            ->get();
+
+        $count_total = count($pickups_2);
 
         $created_user_id = $item['created_user_id'];
         $created_user_data = User::where('id', '=', $created_user_id)->first();
@@ -125,6 +135,7 @@ class ContentController extends Controller
             'created_user_data' => $created_user_data,
             // 'pickup_user_data' => $pickup_user_data,
             'count' => $count,
+            'count_total' =>  $count_total,
 
         ]);
     }
@@ -147,17 +158,6 @@ class ContentController extends Controller
         $content_info->content = $request['content'];
         $content_info->save();
         return redirect(route('output'));
-
-
-        // $title = $request->input('title');
-        // $place_1 = $request->input('place_1');
-        // $place_2 = $request->input('place_2');
-        // $place_3 = $request->input('place_3');
-        // $limit = $request->input('limit');
-        // $cool_now = $request->input('cool_now');
-        // $cool_give = $request->input('cool_give');
-        // $content = $request->input('content');
-        // Content::create(compact('title', 'place_1', 'place_2', 'place_3', 'limit', 'cool_now', 'cool_give', 'content'));
     }
 
     public function delete(Request $request)
@@ -223,7 +223,18 @@ class ContentController extends Controller
         ]);
     }
 
+    public function result_save(Request $request)
+    {
+        DB::table('pickups')
+            ->where('id', $request->id)
+            ->update([
+                'result' => $request->result,
+                'is_answered' => $request->is_answered
 
+            ]);
+
+        return redirect()->route('detail', ['content_id' => $request->content_id]);    // getに渡す値
+    }
 
     public function start_guide()
     {

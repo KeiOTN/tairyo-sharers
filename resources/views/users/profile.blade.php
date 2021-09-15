@@ -1,7 +1,7 @@
 <x-app-layout>
     <x-slot name="header">
-        <h2 class="font-semibold text-xl text-gray-800 leading-tight">
-            {{ __('マイページ') }}
+        <h2 class="font-semibold text-xl text-gray-700 leading-tight">
+            {{ __('プロフィール') }}
         </h2>
     </x-slot>
 
@@ -9,10 +9,14 @@
         <div class="max-w-7xl mx-auto sm:px-6 lg:px-8 mt-4 bg-white">
             <div class="sm:w-1/3 text-center sm:py-8 m-4">
 
-                <div class="relative  text-blue-500 ">
-                    <a href='{{ route('myprofile_edit') }}' class="text-xs absolute right-0 top-2">プロフィールを編集する
-                    </a>
-                </div>
+                @if (Auth::id() == $user_data['id'])
+                    <div class="relative  text-blue-500 ">
+                        <a href='{{ route('myprofile_edit') }}' class="text-xs absolute right-0 top-2">プロフィールを編集する
+                        </a>
+                    </div>
+                @else
+
+                @endif
                 <div
                     class="w-20 h-20 rounded-full inline-flex items-center justify-center bg-gray-200 text-gray-400 my-4">
                     <svg fill="none" stroke="currentColor" stroke-linecap="round" stroke-linejoin="round"

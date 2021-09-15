@@ -9,7 +9,8 @@
         <div class="max-w-7xl mx-auto sm:px-6 lg:px-8">
             <div class="flex flex-col -m-2">
                 {{-- profile --}}
-                <div class="p-2 lg:w-1/3 md:w-1/2 w-full mt-4" onClick="location.href='{{ route('myprofile') }}'">
+                <div class="p-2 lg:w-1/3 md:w-1/2 w-full mt-4"
+                    onClick="location.href='{{ route('profile', ['id' => Auth::id()]) }}'">
                     <div class="h-full flex items-center border-gray-200 border p-4 rounded-lg bg-white">
                         <svg class="w-8 mr-4 text-blue-300" xmlns="http://www.w3.org/2000/svg" fill="none"
                             viewBox="0 0 24 24" stroke="currentColor">

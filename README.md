@@ -9,12 +9,18 @@
 - ユーザー登録U機能追加(D未、画像未)
 - Service/UserService追加
 - user関連、Auth::書き換え
-- Laravel Collective一部実装(今後、順次書き換え予定)
+- Laravel Collective inputの一部に実装(今後、順次書き換え予定)
 
-## 9/ commit
+## 9/14 commit
+- 出品者画面に受取リクエスト表示
+
+## 9/15 commit
+- 出品者画面の受取リクエスト 受諾/拒否 操作実装
+- profileへリンク追加
 - 
-- 
-- 
+
+
+
 
 
 <!-- <p align="center"><a href="https://laravel.com" target="_blank"><img src="https://raw.githubusercontent.com/laravel/art/master/logo-lockup/5%20SVG/2%20CMYK/1%20Full%20Color/laravel-logolockup-cmyk-red.svg" width="400"></a></p>

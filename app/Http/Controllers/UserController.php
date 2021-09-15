@@ -38,14 +38,14 @@ class UserController extends Controller
         // return redirect(route('mypage'));
     }
 
-    public function myprofile()
+    public function profile($id)
     {
-        $user_data =  UserService::get_profile(Auth::id());
+        $user_data =  UserService::get_profile($id);
         // $user_get_query = User::select('*');
         // $user_data = $user_get_query->find($user_id)->toArray();
 
 
-        return view('users.myprofile', [
+        return view('users.profile', [
             'user_data' => $user_data,
         ]);
     }
