@@ -97,7 +97,8 @@
                                                                 </form>
                                                             </div>
                                                             <div class="flex justify-center">
-                                                                <div
+                                                                <?php $pickup_id = $pickup->pickups_id; ?>
+                                                                <div onClick="location.href='{{ route('each_request', ['pickup_id' => $pickup_id]) }}'"
                                                                     class="m-2 
                                             flex mx-auto text-white bg-blue-400 border-0 py-2 px-8 focus:outline-none hover:bg-blue-500 rounded text-xs">
                                                                     詳細をみる</div>

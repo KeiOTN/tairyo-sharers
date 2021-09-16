@@ -29,7 +29,6 @@ class CreateContentsTable extends Migration
             $table->datetime('datetime_3')->nullable();
             $table->string('place_3')->nullable();
             $table->datetime('limit'); // 申込期限
-            $table->integer('is_expired'); // 締め切り理由
             $table->string('process_1')->nullable(); // 締め方
             $table->string('process_2')->nullable();
             $table->string('process_3')->nullable();
@@ -44,6 +43,7 @@ class CreateContentsTable extends Migration
             $table->string('cool_give'); // 渡すときの保冷方法
             // $table->string('send_or_not');
             $table->string('content')->nullable();
+            $table->integer('is_expired')->nullable(); // 締切前NULL,締切後理由をintで入力
             $table->timestamps();
             $table->softDeletes();
         });

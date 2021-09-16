@@ -8,6 +8,7 @@ use App\Models\User;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Storage;
 use \DB;
+use \Auth;
 
 
 class ContentController extends Controller
@@ -110,11 +111,10 @@ class ContentController extends Controller
             ->join('users', 'users.id', '=', 'pickups.pickup_user_id')
             ->join('contents', 'contents.id', '=', 'pickups.fish_id')
             ->select('pickups.id as pickups_id', 'pickups.fish_id', 'pickups.pickup', 'pickups.pickup_detail', 'pickups.is_answered', 'users.id as users_id', 'users.name', 'contents.*')
-            ->where('pickups.fish_id', '=', $content_id)
             ->where('is_answered', '!=', 1)->orWhereNull('is_answered')
+            ->where('fish_id', '=', $content_id)
             ->get();  // 申し込みに関する情報（複数）
         $count = count($pickups); // 申し込み件数(未回答)
-
 
         $pickups_2 = DB::table('pickups')
             ->join('users', 'users.id', '=', 'pickups.pickup_user_id')
@@ -222,6 +222,27 @@ class ContentController extends Controller
             'lists' => $lists,
         ]);
     }
+
+    public function each_request($pickup_id)
+    {
+        $pickup = Pickup::select('*')->find($pickup_id);
+        $content_id = $pickup->fish_id;
+        $content = Content::select('*')->find($content_id);
+        $pickup_user_id = $pickup->pickup_user_id;
+        $pickup_user = User::select('*')->find($pickup_user_id);
+        $auth_user = User::select('*')->find(Auth::id());
+
+
+
+        return view('contents.each_request', [
+            'pickup' => $pickup,
+            'content' => $content,
+            'pickup_user' =>  $pickup_user,
+            'auth_user' => $auth_user,
+        ]);
+    }
+
+
 
     public function result_save(Request $request)
     {

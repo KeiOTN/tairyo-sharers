@@ -60,12 +60,16 @@ Route::post('/pickup_request_comfirm', [ContentController::class, 'pickup_reques
 Route::get('/pickup_request_list', [ContentController::class, 'pickup_request_list'])->middleware(['auth'])->name('pickup_request_list');
 Route::get('/pickup_request_detail', [ContentController::class, 'pickup_request_detail'])->middleware(['auth'])->name('pickup_request_detail');
 Route::put('/result_save', [ContentController::class, 'result_save'])->middleware(['auth'])->name('result_save');
+Route::get('/each_request/{pickup_id}', [ContentController::class, 'each_request'])->middleware(['auth'])->name('each_request');
+
 
 Route::get('/mypage', [UserController::class, 'mypage'])->middleware(['auth'])->name('mypage');
 Route::get('/profile/{id}', [UserController::class, 'profile'])->middleware(['auth'])->name('profile');
 Route::get('/myprofile_edit', [UserController::class, 'myprofile_edit'])->middleware(['auth'])->name('myprofile_edit');
 Route::post('/myprofile_update', [UserController::class, 'myprofile_update'])->middleware(['auth'])->name('myprofile_update');
 Route::get('/info', [UserController::class, 'info'])->middleware(['auth'])->name('info');
+
+Route::post('/message_save', [MessageController::class, 'imessage_save'])->middleware(['auth'])->name('message_save');
 
 
 require __DIR__ . '/auth.php';

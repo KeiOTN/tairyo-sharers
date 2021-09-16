@@ -25,6 +25,9 @@
                                                 @if (isset($item['file_path']))
                                                     <img src="{{ asset('storage/images/' . $item['id']) }}"
                                                         alt="{{ asset('storage/images/' . $item['id']) }}">
+                                                @else
+                                                    <img src="{{ asset('image/no_image.png') }}"
+                                                        alt="{{ asset('image/no_image.png') }}">
                                                 @endif
                                             </div>
                                             <div class="flex flex-col sm:flex-row">
