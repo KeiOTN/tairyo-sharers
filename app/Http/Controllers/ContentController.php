@@ -230,15 +230,14 @@ class ContentController extends Controller
         $content = Content::select('*')->find($content_id);
         $pickup_user_id = $pickup->pickup_user_id;
         $pickup_user = User::select('*')->find($pickup_user_id);
-        $auth_user = User::select('*')->find(Auth::id());
 
-
+        $created_user = User::select('*')->find($content->created_user_id);
 
         return view('contents.each_request', [
             'pickup' => $pickup,
             'content' => $content,
             'pickup_user' =>  $pickup_user,
-            'auth_user' => $auth_user,
+            'created_user' => $created_user,
         ]);
     }
 

@@ -3,6 +3,7 @@
 use Illuminate\Support\Facades\Route;
 use App\Http\Controllers\ContentController;
 use App\Http\Controllers\UserController;
+use App\Http\Controllers\MessageController;
 
 
 
@@ -69,7 +70,7 @@ Route::get('/myprofile_edit', [UserController::class, 'myprofile_edit'])->middle
 Route::post('/myprofile_update', [UserController::class, 'myprofile_update'])->middleware(['auth'])->name('myprofile_update');
 Route::get('/info', [UserController::class, 'info'])->middleware(['auth'])->name('info');
 
-Route::post('/message_save', [MessageController::class, 'imessage_save'])->middleware(['auth'])->name('message_save');
+Route::post('/message_save', [MessageController::class, 'message_save'])->middleware(['auth'])->name('message_save');
 
 
 require __DIR__ . '/auth.php';

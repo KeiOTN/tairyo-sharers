@@ -1,3 +1,9 @@
+{{-- <?php
+var_dump($to_id);
+exit();
+
+?> --}}
+
 <x-app-layout>
     <x-slot name="header">
         <h2 class=" text-xl text-gray-700 leading-tight">
@@ -117,7 +123,16 @@
                 <p class="text-gray-500 text-xs"> メッセージを送る</p>
                 <form action="{{ route('message_save') }}" method="post">
                     @csrf
-
+                    <input type="hidden" name="content_id" value="{{ $pickup->fish_id }}">
+                    <input type="hidden" name="from" value="{{ Auth::id() }}">
+                    <?php
+                    if (Auth::id() == $pickup_user->id) {
+                        $to_id = $created_user->id;
+                    } else {
+                        $to_id = $pickup_user->id;
+                    }
+                    ?>
+                    <input type="hidden" name="to" value="{{ $to_id }}">
                     <textarea id="message" name="message" placeholder="メッセージを記入"
                         class="w-full bg-gray-100 bg-opacity-50 rounded border border-gray-300 focus:border-blue-500 focus:bg-white focus:ring-2 focus:ring-blue-200 h-32 text-sm outline-none text-gray-700 py-1 px-3 resize-none leading-6 transition-colors duration-200 ease-in-out"></textarea>
                     <button
@@ -146,7 +161,7 @@
                         </path>
                         <circle cx="12" cy="7" r="4"></circle>
                     </svg>
-                    <p class="text-xs">{{ $auth_user->name }}</p>
+                    <p class="text-xs">{{ $created_user->name }}</p>
                 </div>
                 <div class="w-full p-4 h-full border text-xs mb-2">
                     <p class="text-sm">sample message from auther</p>
