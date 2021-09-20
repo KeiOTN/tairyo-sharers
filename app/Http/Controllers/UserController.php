@@ -10,6 +10,7 @@ use App\Http\Services\UserService;
 
 use Illuminate\Http\Request;
 use \Auth;
+use \DB;
 
 class UserController extends Controller
 {
@@ -75,5 +76,64 @@ class UserController extends Controller
         UserService::update($request, Auth::id());
 
         return redirect(route('myprofile'));
+    }
+
+
+    public function now_on_deal()
+    {
+        $contents = DB::table('contents')
+            ->where('created_user_id', '=', Auth::id())
+            ->where('is_expired', '=', '')
+            ->get();
+        $count1 = count($contents);
+
+        $pickups = DB::table('pickups')
+            ->join('contents', 'contents.id', '=', 'pickups.fish_id')
+            ->select('contents.*', 'contents.id as content_id', 'pickups.pickup', 'pickups.is_expired as pickup_is_expired')
+            ->where('pickup_user_id', '=', Auth::id())
+            // ->where('pickups.is_expired', '=', '')
+
+            ->get();
+        $count2 = count($pickups);
+
+
+        return view('users.now_on_deal', [
+            'contents' => $contents,
+            'count1' => $count1,
+            'pickups' => $pickups,
+            'count2' => $count2,
+        ]);
+    }
+
+    public function history_and_evaluation()
+    {
+
+        return view('users.history_and_evaluation', [
+            // 'lists' => $lists,
+        ]);
+    }
+
+    public function setting()
+    {
+
+        return view('users.setting', [
+            // 'lists' => $lists,
+        ]);
+    }
+
+    public function terms_of_service()
+    {
+
+        return view('users.terms_of_service', [
+            // 'lists' => $lists,
+        ]);
+    }
+
+    public function help()
+    {
+
+        return view('users.help', [
+            // 'lists' => $lists,
+        ]);
     }
 }

@@ -64,13 +64,21 @@ Route::put('/result_save', [ContentController::class, 'result_save'])->middlewar
 Route::get('/each_request/{pickup_id}', [ContentController::class, 'each_request'])->middleware(['auth'])->name('each_request');
 
 
+
 Route::get('/mypage', [UserController::class, 'mypage'])->middleware(['auth'])->name('mypage');
 Route::get('/profile/{id}', [UserController::class, 'profile'])->middleware(['auth'])->name('profile');
 Route::get('/myprofile_edit', [UserController::class, 'myprofile_edit'])->middleware(['auth'])->name('myprofile_edit');
 Route::post('/myprofile_update', [UserController::class, 'myprofile_update'])->middleware(['auth'])->name('myprofile_update');
 Route::get('/info', [UserController::class, 'info'])->middleware(['auth'])->name('info');
+Route::get('/now_on_deal', [UserController::class, 'now_on_deal'])->middleware(['auth'])->name('now_on_deal');
+Route::get('/history_and_evaluation', [UserController::class, 'history_and_evaluation'])->middleware(['auth'])->name('history_and_evaluation');
+Route::get('/setting', [UserController::class, 'setting'])->middleware(['auth'])->name('setting');
+Route::get('/terms_of_service', [UserController::class, 'terms_of_service'])->middleware(['auth'])->name('terms_of_service');
+Route::get('/help', [UserController::class, 'help'])->middleware(['auth'])->name('help');
+
+
+
 
 Route::post('/message_save', [MessageController::class, 'message_save'])->middleware(['auth'])->name('message_save');
-
 
 require __DIR__ . '/auth.php';

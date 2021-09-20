@@ -16,14 +16,7 @@ class UserSeeder extends Seeder
     public function run()
     {
         DB::table('users')->insert([
-            [
-                // 管理者
-                'name' => 'test_admin01',
-                'email' => 'test_admin01@example.com',
-                'password' => Hash::make('password123'),
-                // 'is_admin' => '1',
-                'created_at' => '2021/01/01 11:11:11'
-            ],
+
             [
                 // 以下、ユーザー
                 'name' => '釣太郎',
@@ -95,6 +88,14 @@ class UserSeeder extends Seeder
                 // 'comment' => '自分も釣りするけどなかなか釣れないので、大きな魚を捌いてみたいです',
                 // 'giver' => '',
                 // 'receiver' => '1',
+                'created_at' => '2021/01/01 11:11:11'
+            ],
+            [
+                // 管理者
+                'name' => 'test_admin01',
+                'email' => 'test_admin01@example.com',
+                'password' => Hash::make('password123'),
+                // 'is_admin' => '1',
                 'created_at' => '2021/01/01 11:11:11'
             ],
 
