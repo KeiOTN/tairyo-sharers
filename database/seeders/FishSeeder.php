@@ -20,7 +20,7 @@ class FishSeeder extends Seeder
                 // NO.1
                 'file_name' => '',
                 'file_path' => '',
-                'created_user_id' => '2',
+                'created_user_id' => '1',
                 'title' => '真鯛、蓮子鯛10匹',
                 'size' => '20-50cm',
                 'fishing_area' => '玄界灘',
@@ -52,7 +52,7 @@ class FishSeeder extends Seeder
                 // NO.2
                 'file_name' => '',
                 'file_path' => '',
-                'created_user_id' => '2',
+                'created_user_id' => '1',
                 'title' => 'ブリ2匹',
                 'size' => '50-60cm',
                 'fishing_area' => '玄界灘',
@@ -84,7 +84,7 @@ class FishSeeder extends Seeder
                 // NO.3
                 'file_name' => '',
                 'file_path' => '',
-                'created_user_id' => '2',
+                'created_user_id' => '1',
                 'title' => 'アジ30匹くらい',
                 'size' => '20-50cm',
                 'fishing_area' => '玄界灘',
@@ -116,7 +116,7 @@ class FishSeeder extends Seeder
                 // NO.4
                 'file_name' => '',
                 'file_path' => '',
-                'created_user_id' => '3',
+                'created_user_id' => '2',
                 'title' => 'ブリ',
                 'size' => '50-70cm',
                 'fishing_area' => '玄界灘',
@@ -148,7 +148,7 @@ class FishSeeder extends Seeder
                 // No.5
                 'file_name' => '',
                 'file_path' => '',
-                'created_user_id' => '3',
+                'created_user_id' => '2',
                 'title' => '太刀魚全部で20本',
                 'size' => '指3-5本',
                 'fishing_area' => '玄界灘',
@@ -180,7 +180,7 @@ class FishSeeder extends Seeder
                 // NO.6
                 'file_name' => '',
                 'file_path' => '',
-                'created_user_id' => '3',
+                'created_user_id' => '2',
                 'title' => 'イトヨリ10匹',
                 'size' => '20-40cm',
                 'fishing_area' => '対馬周辺',
@@ -212,7 +212,7 @@ class FishSeeder extends Seeder
                 // NO.7
                 'file_name' => '',
                 'file_path' => '',
-                'created_user_id' => '4',
+                'created_user_id' => '3',
                 'title' => 'アコウ8匹',
                 'size' => '20-30cm',
                 'fishing_area' => '',
@@ -244,7 +244,7 @@ class FishSeeder extends Seeder
                 // NO.8
                 'file_name' => '',
                 'file_path' => '',
-                'created_user_id' => '4',
+                'created_user_id' => '3',
                 'title' => '真鯛、蓮子鯛10匹',
                 'size' => '20-50cm',
                 'fishing_area' => '鹿児島',
@@ -276,7 +276,7 @@ class FishSeeder extends Seeder
                 // NO.9
                 'file_name' => '',
                 'file_path' => '',
-                'created_user_id' => '4',
+                'created_user_id' => '3',
                 'title' => 'ブリ5匹',
                 'size' => '50-70cm',
                 'fishing_area' => '鹿児島',

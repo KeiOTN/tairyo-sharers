@@ -3,6 +3,7 @@
 namespace App\Http\Services;
 
 use App\Models\User;
+use Illuminate\Support\Facades\Storage;
 
 class UserService
 {
@@ -22,6 +23,8 @@ class UserService
     {
         User::where('id', $user_id)
             ->update([
+                'file_path' => Storage::putFile('/users', $request->file('file'), 'public'),
+                'file_name' => $request->file('file')->getClientOriginalName(),
                 'name' => $request->name,
                 'email' => $request->email,
                 'comment' => $request->comment,

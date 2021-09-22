@@ -67,32 +67,50 @@ class UserController extends Controller
 
     public function myprofile_update(Request $request)
     {
-        $request->validate([
-            'name' => 'required',
-            'email' => 'required',
+        if ($request->file('file')) {
 
-        ]);
+            $this->validate($request, [
+                'file' => [
+                    // 空でないこと
+                    //'required',
+                    // アップロードされたファイルであること
+                    'file',
+                    // 画像ファイルであること
+                    'image',
+                    // MIMEタイプを指定
+                    'mimes:jpeg,png',
+                ]
+            ]);
+            if ($request->file('file')->isValid([])) {
 
-        UserService::update($request, Auth::id());
 
-        return redirect(route('myprofile'));
+                $request->validate([
+                    'name' => 'required',
+                    'email' => 'required',
+                ]);
+
+                UserService::update($request, Auth::id());
+            }
+        }
+        return redirect(route('profile', ['id' => Auth::id()]));
     }
 
 
     public function now_on_deal()
     {
+        // 受取募集中の魚
         $contents = DB::table('contents')
             ->where('created_user_id', '=', Auth::id())
             ->where('is_expired', '=', '')
             ->get();
         $count1 = count($contents);
 
+        // 受取リクエストした魚
         $pickups = DB::table('pickups')
             ->join('contents', 'contents.id', '=', 'pickups.fish_id')
-            ->select('contents.*', 'contents.id as content_id', 'pickups.pickup', 'pickups.is_expired as pickup_is_expired')
-            ->where('pickup_user_id', '=', Auth::id())
-            // ->where('pickups.is_expired', '=', '')
-
+            ->select('contents.*', 'contents.id as content_id', 'pickups.id as pickup_id', 'pickups.pickup', 'pickups.pickup_detail', 'pickups.pickup_user_id', 'pickups.is_expired as pickup_is_expired')
+            ->where('pickups.pickup_user_id', '=', Auth::id())
+            ->where('pickups.is_expired', '=', '')->orWhereNull('pickups.is_answered')
             ->get();
         $count2 = count($pickups);
 

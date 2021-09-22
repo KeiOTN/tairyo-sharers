@@ -42,31 +42,31 @@
                         </x-dropdown-link>
 
                         <x-dropdown-link onClick="href='{{ route('input') }}'">
-                            {{ __('出品する/登録魚一覧') }}
+                            {{ __('出品する(魚の貰い手を探す)') }}
                         </x-dropdown-link>
 
                         <x-dropdown-link onClick="href='{{ route('now_on_deal') }}'">
-                            {{ __('取引中一覧') }}
+                            {{ __('受取リクエスト中/出品中一覧') }}
                         </x-dropdown-link>
 
                         <x-dropdown-link onClick="href='{{ route('history_and_evaluation') }}'">
-                            {{ __('取引履歴/評価') }}
+                            {{ __('取引履歴/評価(未)') }}
                         </x-dropdown-link>
 
                         <x-dropdown-link onClick="href='{{ route('setting') }}'">
-                            {{ __('引渡し/受取条件設定') }}
+                            {{ __('引渡し/受取条件設定(未)') }}
                         </x-dropdown-link>
 
-                        <x-dropdown-link onClick="href='{{ route('mypage') }}'">
-                            {{ __('マイページ') }}
+                        <x-dropdown-link onClick="href='{{ route('profile', ['id' => Auth::id()]) }}'">
+                            {{ __('マイプロフィール') }}
                         </x-dropdown-link>
 
                         <x-dropdown-link onClick="href='{{ route('terms_of_service') }}'">
-                            {{ __('利用規約') }}
+                            {{ __('利用規約(未)') }}
                         </x-dropdown-link>
 
                         <x-dropdown-link onClick="href='{{ route('help') }}'">
-                            {{ __('ヘルプ') }}
+                            {{ __('ヘルプ(未)') }}
                         </x-dropdown-link>
 
 
@@ -121,19 +121,20 @@
             <div class="mt-3 space-y-1">
             </div>
             <x-responsive-nav-link onClick="href='{{ route('info') }}'">{{ __('お知らせ') }}</x-responsive-nav-link>
-            <x-responsive-nav-link onClick="href='{{ route('input') }}'">{{ __('出品する/登録魚一覧') }}
+            <x-responsive-nav-link onClick="href='{{ route('input') }}'">{{ __('出品する(魚の貰い手を探す)') }}
             </x-responsive-nav-link>
-            <x-responsive-nav-link onClick="href='{{ route('now_on_deal') }}'">{{ __('取引中一覧') }}
+            <x-responsive-nav-link onClick="href='{{ route('now_on_deal') }}'">{{ __('受取リクエスト中/出品中一覧') }}
             </x-responsive-nav-link>
-            <x-responsive-nav-link onClick="href='{{ route('history_and_evaluation') }}'">{{ __('取引履歴/評価') }}
+            <x-responsive-nav-link onClick="href='{{ route('history_and_evaluation') }}'">{{ __('取引履歴/評価(未)') }}
             </x-responsive-nav-link>
-            <x-responsive-nav-link onClick="href='{{ route('setting') }}'">{{ __('引渡し/受取条件設定') }}
+            <x-responsive-nav-link onClick="href='{{ route('setting') }}'">{{ __('引渡し/受取条件設定(未)') }}
             </x-responsive-nav-link>
-            <x-responsive-nav-link onClick="href='{{ route('mypage') }}'">{{ __('マイページ') }}
+            <x-responsive-nav-link onClick="href='{{ route('profile', ['id' => Auth::id()]) }}'">
+                {{ __('マイプロフィール') }}
             </x-responsive-nav-link>
-            <x-responsive-nav-link onClick="href='{{ route('terms_of_service') }}'">{{ __('利用規約') }}
+            <x-responsive-nav-link onClick="href='{{ route('terms_of_service') }}'">{{ __('利用規約(未)') }}
             </x-responsive-nav-link>
-            <x-responsive-nav-link onClick="href='{{ route('help') }}'">{{ __('ヘルプ') }}</x-responsive-nav-link>
+            <x-responsive-nav-link onClick="href='{{ route('help') }}'">{{ __('ヘルプ(未)') }}</x-responsive-nav-link>
             <!-- Authentication -->
             <form method="POST" action="{{ route('logout') }}">
                 @csrf

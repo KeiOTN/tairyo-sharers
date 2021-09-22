@@ -17,8 +17,7 @@
 
                             {{-- 登録されていた画像を表示 --}}
                             <div>現在登録されている画像</div>
-                            {{-- @if (isset($user_data['file_path'])) --}}
-                            @if ($user_data['file_path'] == '')
+                            @if (!isset($user_data['file_path']))
                                 <div
                                     class="w-20 h-20 rounded-full inline-flex items-center justify-center bg-gray-200 text-gray-400">
                                     <svg fill="none" stroke="currentColor" stroke-linecap="round"
@@ -30,8 +29,10 @@
                                 </div>
 
                             @else
-                                <img src="{{ asset('storage/users/' . $user_data['id']) }}"
-                                    alt="{{ asset('storage/users/' . $user_data['id']) }}">
+                                <div class="w-40 h-40 rounded-full">
+                                    <img src="{{ asset('storage/' . $user_data['file_path']) }}"
+                                        alt="{{ asset('storage/' . $user_data['file_path']) }}">
+                                </div>
                             @endif
 
                             {{-- 新しい画像をアップロード --}}
@@ -39,7 +40,7 @@
                                 <div class="relative">
                                     <span class="text-white bg-blue-400 border-0 py-1 px-2 rounded text-sm">任意</span>
                                     <label for="" class="leading-7 text-sm text-gray-600">新しく登録する画像を選択</label>
-                                    <input type="file" id="" name=""
+                                    <input type="file" id="file" name="file"
                                         class="w-full bg-gray-100 bg-opacity-50 rounded border border-gray-300 focus:border-blue-500 focus:bg-white focus:ring-2 focus:ring-blue-200 text-sm outline-none text-gray-700 py-1 px-3 leading-8 transition-colors duration-200 ease-in-out">
                                 </div>
                             </div>
@@ -76,7 +77,7 @@
 
                                     {{ Form::textarea('comment', old('comment') ?? ($user_data['comment'] ?? ''), [
     'class' => 'w-full bg-gray-100 bg-opacity-50 rounded border border-gray-300 focus:border-blue-500 focus:bg-white focus:ring-2 focus:ring-blue-200 h-32 text-sm outline-none text-gray-700 resize-none leading-6 transition-colors duration-200 ease-in-out' . ($errors->has('comment') ? ' is-invalid' : ''),
-    'required' => true,
+    'required' => false,
 ]) }}
                                 </div>
                                 @if ($errors->has('comment'))
@@ -99,14 +100,14 @@
                                     <label for="giver_or_reciever" class="leading-7 text-sm text-gray-600">利用目的</label>
                                 </div>
                                 <div class="p-2 w-full flex flex-row justify-center">
-                                    <div class="w-1/4">
+                                    <div class="w-1/2 md:w-1/4">
                                         <input
                                             class="rounded border-gray-300 text-blue-600 shadow-sm focus:border-blue-300 focus:ring focus:ring-blue-200 focus:ring-opacity-50"
                                             type="checkbox" name="giver" value="1"
                                             {{ $user_data['giver'] ? 'checked' : '' }}>
                                         <label for="scales" class="text-sm font-black">魚をあげたい</label>
                                     </div>
-                                    <div class="w-1/4">
+                                    <div class="w-1/2 md:w-1/4">
                                         <input
                                             class="rounded border-gray-300 text-blue-600 shadow-sm focus:border-blue-300 focus:ring focus:ring-blue-200 focus:ring-opacity-50"
                                             type="checkbox" name="receiver" value="1"

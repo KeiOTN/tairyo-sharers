@@ -5,6 +5,7 @@ namespace App\Http\Controllers;
 use App\Models\Content;
 use App\Models\Pickup;
 use App\Models\User;
+use App\Models\Message;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Storage;
 use \DB;
@@ -113,16 +114,32 @@ class ContentController extends Controller
             ->select('pickups.id as pickups_id', 'pickups.fish_id', 'pickups.pickup', 'pickups.pickup_detail', 'pickups.is_answered', 'users.id as users_id', 'users.name', 'contents.*')
             ->where('is_answered', '!=', 1)->orWhereNull('is_answered')
             ->where('fish_id', '=', $content_id)
-            ->get();  // 申し込みに関する情報（複数）
+            ->get();  // 申し込みに関する情報（未回答全て）
         $count = count($pickups); // 申し込み件数(未回答)
 
         $pickups_2 = DB::table('pickups')
             ->join('users', 'users.id', '=', 'pickups.pickup_user_id')
             ->join('contents', 'contents.id', '=', 'pickups.fish_id')
             ->where('pickups.fish_id', '=', $content_id)
-            ->get();
+            ->get();  // 申し込みに関する情報（申込全て）
+        $count_total = count($pickups_2); //申し込み件数(総数)
 
-        $count_total = count($pickups_2);
+        $pickups_own = DB::table('pickups')
+            ->join('users', 'users.id', '=', 'pickups.pickup_user_id')
+            ->join('contents', 'contents.id', '=', 'pickups.fish_id')
+            ->select('pickups.id as pickups_id')
+            ->where('pickups.fish_id', '=', $content_id)
+            ->where('pickups.pickup_user_id', '=', Auth::id())
+            ->get();
+        $pickups_own_exist = count($pickups_own); //申込履歴があるか
+
+        $answers = DB::table('pickups')
+            ->join('users', 'users.id', '=', 'pickups.pickup_user_id')
+            ->select('pickups.*', 'pickups.id as pickups_id', 'users.id as users_id', 'users.name')
+            ->where('is_answered', '=', 1)
+            ->where('fish_id', '=', $content_id)
+            ->get();  //回答済みのリクエスト情報
+
 
         $created_user_id = $item['created_user_id'];
         $created_user_data = User::where('id', '=', $created_user_id)->first();
@@ -136,6 +153,9 @@ class ContentController extends Controller
             // 'pickup_user_data' => $pickup_user_data,
             'count' => $count,
             'count_total' =>  $count_total,
+            'pickups_own' => $pickups_own,
+            'pickups_own_exist' => $pickups_own_exist,
+            'answers' => $answers,
 
         ]);
     }
@@ -233,11 +253,20 @@ class ContentController extends Controller
 
         $created_user = User::select('*')->find($content->created_user_id);
 
+        $messages = Message::select('*')
+            ->where('pickup_id', '=', $pickup->id)
+            ->orderBy('created_at', 'desc')
+            ->get();
+
+
         return view('contents.each_request', [
+            'pickup_id' => $pickup_id,
             'pickup' => $pickup,
             'content' => $content,
             'pickup_user' =>  $pickup_user,
             'created_user' => $created_user,
+            'messages' => $messages,
+
         ]);
     }
 

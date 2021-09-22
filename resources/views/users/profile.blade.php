@@ -6,9 +6,9 @@
     </x-slot>
 
     <div>
-        <div class="max-w-7xl mx-auto sm:px-6 lg:px-8 mt-4 bg-white">
-            <div class="sm:w-1/3 text-center sm:py-8 m-4">
+        <div class="max-w-7xl mx-auto sm:px-6 lg:px-8 mt-4 bg-white flex justify-center">
 
+            <div class="sm:w-1/3 text-center sm:py-8 m-4">
                 @if (Auth::id() == $user_data['id'])
                     <div class="relative  text-blue-500 ">
                         <a href='{{ route('myprofile_edit') }}' class="text-xs absolute right-0 top-2">プロフィールを編集する
@@ -17,14 +17,32 @@
                 @else
 
                 @endif
-                <div
+
+
+                @if ($user_data['file_path'] == null)
+                    <div
+                        class="m-4 w-20 h-20 rounded-full inline-flex items-center justify-center bg-gray-200 text-gray-400">
+                        <svg fill="none" stroke="currentColor" stroke-linecap="round" stroke-linejoin="round"
+                            stroke-width="2" class="w-10 h-10" viewBox="0 0 24 24">
+                            <path d="M20 21v-2a4 4 0 00-4-4H8a4 4 0 00-4 4v2"></path>
+                            <circle cx="12" cy="7" r="4"></circle>
+                        </svg>
+                    </div>
+
+                @else
+                    <div class="inline-flex items-center justify-center w-40 h-40 rounded-full">
+                        <img class="rounded-full" src="{{ asset('storage/' . $user_data['file_path']) }}"
+                            alt="{{ asset('storage/' . $user_data['file_path']) }}">
+                    </div>
+                @endif
+                {{-- <div
                     class="w-20 h-20 rounded-full inline-flex items-center justify-center bg-gray-200 text-gray-400 my-4">
                     <svg fill="none" stroke="currentColor" stroke-linecap="round" stroke-linejoin="round"
                         stroke-width="2" class="w-10 h-10" viewBox="0 0 24 24">
                         <path d="M20 21v-2a4 4 0 00-4-4H8a4 4 0 00-4 4v2"></path>
                         <circle cx="12" cy="7" r="4"></circle>
                     </svg>
-                </div>
+                </div> --}}
                 {{-- <div class="flex flex-col items-center text-center justify-center my-4">
 
                     <h2 class="font-medium title-font mt-4 text-gray-900 text-lg">{{ $user_data['name'] }}

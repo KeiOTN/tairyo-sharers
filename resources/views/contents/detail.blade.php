@@ -1,3 +1,10 @@
+{{-- <?php
+echo '<pre>';
+var_dump($item);
+echo '<pre>';
+exit();
+?> --}}
+
 <x-app-layout>
     <x-slot name="header">
         <h2 class=" text-xl text-gray-700 leading-tight">
@@ -14,7 +21,7 @@
                             <div class="bg-white overflow-hidden shadow-sm sm:rounded-lg">
                                 <div class="container px-5 py-8 mx-auto flex flex-col">
 
-                                    <div class="lg:w-2/3 mx-auto">
+                                    <div class="w-full">
 
                                         {{-- {{ $owners_judge }} --}}
 
@@ -24,18 +31,19 @@
                                             <div class="text-right text-xs">
                                                 申し込み締め切り前に募集を締め切りたい場合は<a class="text-blue-500 underline text-sm">こちら</a>
                                             </div>
+                                            <p class="font-black font-bold">現在の申込総数は{{ $count_total }}件です。</p>
                                             {{-- 申し込みがまだないとき --}}
-                                            @if ($count < 1)
+                                            {{-- @if ($count < 1)
                                                 現在、新規申込はありません<br>
-                                                現在の申込総数は{{ $count_total }}件です。
-                                                {{-- 申し込みがあるとき --}}
-                                            @elseif($count >= 1 )
-                                                受取りリクエストが{{ $count }}件あります。<br>
+                                                現在の申込総数は{{ $count_total }}件です。 --}}
+                                            {{-- 申し込みがあるとき --}}
+                                            @if ($count >= 1)
+                                                未回答のリクエストが{{ $count }}件あります。
                                                 回答をお願いします。
                                                 @foreach ($pickups as $pickup)
-                                                    <div class="p-2 lg:w-1/3 md:w-1/2 w-full">
+                                                    <div class="w-full">
                                                         <div
-                                                            class="h-full flex flex-col items-center border-gray-200 border p-4 rounded-lg bg-white">
+                                                            class="mb-2 h-full flex flex-col md:flex-row items-center border-gray-200 border p-4 rounded-lg bg-white">
                                                             <div class="w-full flex flex-row">
                                                                 <svg fill="none" stroke="currentColor"
                                                                     stroke-linecap="round" stroke-linejoin="round"
@@ -46,29 +54,29 @@
                                                                     </path>
                                                                     <circle cx="12" cy="7" r="4"></circle>
                                                                 </svg>
-                                                                <div class="flex-grow w-9/10">
+                                                                <div class="flex-row w-9/10">
                                                                     <h2 class="text-gray-900 title-font font-medium">
                                                                         {{ $pickup->name }}さんから受け取り希望が届いています
                                                                     </h2>
                                                                     <p class="text-gray-500 text-xs">受け取り希望場所:
                                                                         @if ($pickup->pickup <= 3)
                                                                             <?php $num_key1 = 'place_' . $pickup->pickup; ?>
-                                                                            {{ $pickup->$num_key1 }}
+                                                                            {{ $item->$num_key1 }}
                                                                         @elseif($pickup->pickup=4)
-                                                                            {{ $pickup->pickup_detail }}
+                                                                            {{ $item->pickup_detail }}
                                                                         @endif
                                                                     </p>
                                                                     <p class="text-gray-500 text-xs">受け取り希望時間:
                                                                         @if ($pickup->pickup <= 3)
                                                                             <?php $num_key2 = 'datetime_' . $pickup->pickup; ?>
-                                                                            {{ $pickup->$num_key2 }}
+                                                                            {{ $item->$num_key2 }}
                                                                         @elseif($pickup->pickup=4)
                                                                             要相談
                                                                         @endif
                                                                     </p>
                                                                 </div>
                                                             </div>
-                                                            <div class="flex flex-row text-center">
+                                                            <div class="flex flex-row text-center md:w-2/5">
 
                                                                 <form action="{{ route('result_save') }}"
                                                                     method="POST">
@@ -84,28 +92,223 @@
                                                                         value='{{ $pickup->fish_id }}'>
                                                                     <div class="flex flex-row text-center">
                                                                         <button type="submit" name="result" value="1"
-                                                                            class="w-full m-2 px-4 
+                                                                            class="w-32 m-2 px-4 
                                             text-white bg-yellow-500 border-0 py-2 focus:outline-none hover:bg-yello-600 rounded text-xs">
                                                                             この人にあげる！
                                                                         </button>
                                                                         <button type="submit" name="result" value="2"
-                                                                            class="w-full m-2 px-4
+                                                                            class="w-32 m-2 px-4
                                             text-white bg-red-500 border-0 py-2 focus:outline-none hover:bg-red-600 rounded text-xs">
                                                                             お断りする
                                                                         </button>
                                                                     </div>
                                                                 </form>
                                                             </div>
-                                                            <div class="flex justify-center">
+                                                            <div class="flex justify-center md:w-1/3">
                                                                 <?php $pickup_id = $pickup->pickups_id; ?>
                                                                 <div onClick="location.href='{{ route('each_request', ['pickup_id' => $pickup_id]) }}'"
-                                                                    class="m-2 
+                                                                    class="m-2 w-32
                                             flex mx-auto text-white bg-blue-400 border-0 py-2 px-8 focus:outline-none hover:bg-blue-500 rounded text-xs">
                                                                     詳細をみる</div>
                                                             </div>
                                                         </div>
                                                     </div>
                                                 @endforeach
+
+                                                <?php
+                                                $answered_count = $count_total - $count;
+                                                ?>
+                                                回答済みリクエストが{{ $answered_count }}件です。
+                                                @foreach ($answers as $answer)
+
+                                                    <div class="w-full">
+                                                        <div
+                                                            class="mb-2 h-full flex flex-col md:flex-row items-center border-gray-200 border p-4 rounded-lg bg-white">
+                                                            <div class="w-full flex flex-row md:w-1/2">
+                                                                <div class="flex-row w-9/10">
+                                                                    <h2 class="text-gray-900 title-font font-medium">
+                                                                        {{ $answer->name }}さんの受け取りリクエストに回答済です
+                                                                    </h2>
+                                                                    <p class="text-gray-500 text-xs">受け取り希望場所:
+                                                                        @if ($answer->pickup <= 3)
+                                                                            <?php $num_key1 = 'place_' . $answer->pickup; ?>
+                                                                            {{ $item->$num_key1 }}
+                                                                        @elseif($answer->pickup=4)
+                                                                            {{ $answer->pickup_detail }}
+                                                                        @endif
+                                                                    </p>
+                                                                    <p class="text-gray-500 text-xs">受け取り希望時間:
+                                                                        @if ($answer->pickup <= 3)
+                                                                            <?php $num_key2 = 'datetime_' . $answer->pickup; ?>
+                                                                            {{ $item->$num_key2 }}
+                                                                        @elseif($answer->pickup=4)
+                                                                            要相談
+                                                                        @endif
+                                                                    </p>
+                                                                </div>
+                                                            </div>
+                                                            <div class="flex flex-row text-center w-full md:w-1/2">
+                                                                <div
+                                                                    class="flex flex-row items-center justify-center w-full">
+                                                                    <div class="w-full p-2 text-left">
+                                                                        <p class="text-xs"> 回答した内容</p>
+                                                                        <?php
+                                                                        $result = $answer->result;
+                                                                        ?>
+                                                                        @if ($result == 1)
+                                                                            <input
+                                                                                class="rounded border-gray-300 text-yellow-500 shadow-sm"
+                                                                                type="checkbox" checked
+                                                                                onclick="return false;"> この人にあげる！
+
+                                                                        @elseif( $result== 2)
+                                                                            <input
+                                                                                class="rounded border-gray-300 text-red-400 shadow-sm"
+                                                                                type="checkbox" checked
+                                                                                onclick="return false;"> お断りする
+                                                                        @endif
+                                                                    </div>
+                                                                    </button>
+                                                                    <div class="flex justify-center w-full">
+                                                                        <?php $pickup_id = $answer->pickups_id; ?>
+                                                                        <div onClick="location.href='{{ route('each_request', ['pickup_id' => $pickup_id]) }}'"
+                                                                            class="m-2 w-32
+                                            flex mx-auto text-white bg-blue-400 border-0 py-2 px-8 focus:outline-none hover:bg-blue-500 rounded text-xs">
+                                                                            詳細をみる</div>
+                                                                    </div>
+                                                                </div>
+                                                            </div>
+                                                        </div>
+
+                                                @endforeach
+
+
+                                                {{-- 新規申込がないとき --}}
+                                            @elseif($count < 1) 現在、回答の必要なリクエストはありません。 <?php
+$answered_count = $count_total - $count;
+?>
+                                                    回答済みリクエストが{{ $answered_count }}件です。 @foreach ($answers as $answer)
+
+                                                    <div class="w-full">
+                                                        <div
+                                                            class="mb-2 h-full flex flex-col md:flex-row items-center border-gray-200 border p-4 rounded-lg bg-white">
+                                                            <div class="w-full flex flex-row md:w-1/2">
+                                                                <div class="flex-row w-9/10">
+                                                                    <h2 class="text-gray-900 title-font font-medium">
+                                                                        {{ $answer->name }}さんの受け取りリクエストに回答済です
+                                                                    </h2>
+                                                                    <p class="text-gray-500 text-xs">受け取り希望場所:
+                                                                        @if ($answer->pickup <= 3)
+                                                                            <?php $num_key1 = 'place_' . $answer->pickup; ?>
+                                                                            {{ $item->$num_key1 }}
+                                                                        @elseif($answer->pickup=4)
+                                                                            {{ $answer->pickup_detail }}
+                                                                        @endif
+                                                                    </p>
+                                                                    <p class="text-gray-500 text-xs">受け取り希望時間:
+                                                                        @if ($answer->pickup <= 3)
+                                                                            <?php $num_key2 = 'datetime_' . $answer->pickup; ?>
+                                                                            {{ $item > $num_key2 }}
+                                                                        @elseif($answer->pickup=4)
+                                                                            要相談
+                                                                        @endif
+                                                                    </p>
+                                                                </div>
+                                                            </div>
+                                                            <div class="flex flex-row text-center w-full md:w-1/2">
+                                                                <div
+                                                                    class="flex flex-row items-center justify-center w-full">
+                                                                    <div class="w-full p-2 text-left">
+                                                                        <p class="text-xs"> 回答した内容</p>
+                                                                        <?php
+                                                                        $result = $answer->result;
+                                                                        ?>
+                                                                        @if ($result == 1)
+                                                                            <input
+                                                                                class="rounded border-gray-300 text-yellow-500 shadow-sm"
+                                                                                type="checkbox" checked
+                                                                                onclick="return false;"> この人にあげる！
+
+                                                                        @elseif( $result== 2)
+                                                                            <input
+                                                                                class="rounded border-gray-300 text-red-400 shadow-sm"
+                                                                                type="checkbox" checked
+                                                                                onclick="return false;"> お断りする
+                                                                        @endif
+                                                                    </div>
+                                                                    </button>
+                                                                    <div class="flex justify-center w-full">
+                                                                        <?php $pickup_id = $answer->pickups_id; ?>
+                                                                        <div onClick="location.href='{{ route('each_request', ['pickup_id' => $pickup_id]) }}'"
+                                                                            class="m-2 w-32
+                                            flex mx-auto text-white bg-blue-400 border-0 py-2 px-8 focus:outline-none hover:bg-blue-500 rounded text-xs">
+                                                                            詳細をみる</div>
+                                                                    </div>
+                                                                </div>
+                                                            </div>
+                                                        </div>
+                                            @endforeach
+                                            {{-- @foreach ($answers as $answer)
+                                                        <div class="mb-2 w-full">
+                                                            <div
+                                                                class="h-full flex flex-col md:flex-row items-center border-gray-200 border p-4 rounded-lg bg-white">
+                                                                <div class="w-full flex flex-row md:w-1/2">
+                                                                    <div class="flex-row w-9/10">
+                                                                        <h2
+                                                                            class="text-gray-900 title-font font-medium">
+                                                                            {{ $answer->name }}さんから受け取りリクエストに回答済です。
+                                                                        </h2>
+                                                                        <p class="text-gray-500 text-xs">受け取り希望場所:
+                                                                            @if ($answer->pickup <= 3)
+                                                                                <?php $num_key1 = 'place_' . $answer->pickup; ?>
+                                                                                {{ $answer->$num_key1 }}
+                                                                            @elseif($answer->pickup=4)
+                                                                                {{ $answer->pickup_detail }}
+                                                                            @endif
+                                                                        </p>
+                                                                        <p class="text-gray-500 text-xs">受け取り希望時間:
+                                                                            @if ($answer->pickup <= 3)
+                                                                                <?php $num_key2 = 'datetime_' . $answer->pickup; ?>
+                                                                                {{ $answer->$num_key2 }}
+                                                                            @elseif($answer->pickup=4)
+                                                                                要相談
+                                                                            @endif
+                                                                        </p>
+                                                                    </div>
+                                                                </div>
+                                                                <div class="flex flex-row text-center w-full md:w-1/2">
+                                                                    <div
+                                                                        class="flex flex-row items-center justify-center w-full">
+                                                                        <div class="w-full">
+                                                                            <p class="text-xs p-2 text-left"> 回答した内容</p>
+                                                                            <?php
+                                                                            $result = $answer->result;
+                                                                            ?>
+                                                                            @if ($result == 1)
+                                                                                <input
+                                                                                    class="rounded border-gray-300 text-yellow-500 shadow-sm"
+                                                                                    type="checkbox" checked
+                                                                                    onclick="return false;"> この人にあげる！
+
+                                                                            @elseif( $result== 2)
+                                                                                <input
+                                                                                    class="rounded border-gray-300 text-red-400 shadow-sm"
+                                                                                    type="checkbox" checked
+                                                                                    onclick="return false;"> お断りする
+                                                                            @endif
+                                                                        </div>
+                                                                        </button>
+                                                                        <div class="flex justify-center w-full">
+                                                                            <?php $pickup_id = $answer->pickups_id; ?>
+                                                                            <div onClick="location.href='{{ route('each_request', ['pickup_id' => $pickup_id]) }}'"
+                                                                                class="m-2 
+                                            flex mx-auto text-white bg-blue-400 border-0 py-2 px-8 focus:outline-none hover:bg-blue-500 rounded text-xs">
+                                                                                詳細をみる</div>
+                                                                        </div>
+                                                                    </div>
+                                                                </div>
+                                                            </div>
+                                                    @endforeach --}}
                                     </div>
                                     @endif
                                     @endif
@@ -306,13 +509,14 @@
                                                 出品者</h2>
 
 
-                                            @if ($created_user_data['file_path'] == '')
+                                            @if ($created_user_data['file_path'] == null)
                                                 <div
                                                     class="w-20 h-20 rounded-full inline-flex items-center justify-center bg-gray-200 text-gray-400">
                                                     <svg fill="none" stroke="currentColor" stroke-linecap="round"
                                                         stroke-linejoin="round" stroke-width="2" class="w-10 h-10"
                                                         viewBox="0 0 24 24">
-                                                        <path d="M20 21v-2a4 4 0 00-4-4H8a4 4 0 00-4 4v2"></path>
+                                                        <path d="M20 21v-2a4 4 0 00-4-4H8a4 4 0 00-4 4v2">
+                                                        </path>
                                                         <circle cx="12" cy="7" r="4"></circle>
                                                     </svg>
                                                 </div>
@@ -320,8 +524,8 @@
                                             @else
                                                 <div
                                                     class="w-20 h-20 rounded-full inline-flex items-center justify-center bg-gray-200 text-gray-400">
-                                                    <img src="{{ asset('storage/users/' . $created_user_data['id']) }}"
-                                                        alt="{{ asset('storage/users/' . $created_user_data['id']) }}">
+                                                    <img src="{{ asset('storage/' . $created_user_data['file_path']) }}"
+                                                        alt="{{ asset('storage/' . $created_user_data['file_path']) }}">
                                                 </div>
                                             @endif
 
@@ -335,8 +539,9 @@
                                     </div>
 
 
-                                    @if ($created_user_data['id'] !== Auth::id())
-                                        {{-- これはあなたの投稿ではありません:申し込みできます --}}
+                                    @if ($created_user_data['id'] !== Auth::id() && $pickups_own_exist !== 1)
+                                        {{-- これはあなたの投稿ではない&&まだ申込していない:申し込みできます --}}
+
 
                                         {{-- 申し込みがまだないとき --}}
                                         @if ($count_total < 1)
@@ -360,6 +565,18 @@
                                         <p class="leading-relaxed text-lg mb-4 text-red-500 text-center"> <span
                                                 class="tracking-widest text-xs title-font font-medium text-red-500 mb-1 text-right">申込期限:
                                             </span>{{ $item['limit'] }}</p>
+
+                                    @else
+
+
+                                        @foreach ($pickups_own as $value)
+                                            <p class="font-bold font-lg text-center">
+                                                あなたはこの投稿に受取リクエストをしています。詳細は<a
+                                                    href="{{ route('each_request', ['pickup_id' => $value->pickups_id]) }}"
+                                                    class="text-blue-500 border-b-2 border-blue-500">こちら</a>
+                                            </p>
+                                        @endforeach
+
                                     @endif
                                 </div>
                             </div>
