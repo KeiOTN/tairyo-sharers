@@ -79,13 +79,15 @@ class ContentController extends Controller
                 // exit;
             }
         }
-        return redirect(route('output'));
+        return redirect(route('now_on_deal'))->with('status', '魚の登録が完了しました');
     }
 
     public function dashboard()
     {
         $contents_get_query = Content::select('*');
-        $items = $contents_get_query->get();
+        $items = $contents_get_query
+            ->orderBy('created_at', 'desc') //新規登録順に
+            ->get();
 
         return view('dashboard', [
             'items' => $items,
@@ -162,8 +164,8 @@ class ContentController extends Controller
 
     public function edit($content_id)
     {
-        $content_get_query = Content::select('*');
-        $item = $content_get_query->find($content_id);
+        $item = Content::select('*')
+            ->find($content_id);
 
         return view('contents.edit', [
             'item' => $item,
@@ -187,7 +189,7 @@ class ContentController extends Controller
         $contents_delete_query->findOrFail($request['content_id']); // ソフトデリート
         $contents_delete_query->delete();
 
-        return redirect(route('output'));
+        return redirect(route('now_on_deal'));
     }
 
     public function pickup_request($content_id)

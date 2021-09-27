@@ -7,7 +7,8 @@
 </head>
 
 <body>
-    <div class="h-25 m-4" onClick="location.href='{{ route('start_guide') }}'">
+    <div class="h-30 m-4 flex justify-center items-center flex-col"
+        onClick="location.href='{{ route('start_guide') }}'">
         <img src="{{ asset('image/start-guide.png') }}" alt="出品ガイド">
         <p class="lg:w-2/3 mx-auto leading-relaxed text-sm text-center text-gray-900">↑魚の登録方法はこちらをcheck!</p>
     </div>
@@ -31,7 +32,7 @@
                     <div class="p-2 w-full">
                         <div class="relative">
                             <span class="text-white bg-red-400 border-0 py-1 px-2 rounded text-sm">必須</span>
-                            <label for="file" class="leading-7 text-sm text-gray-600">画像を選択</label>
+                            <label for="file" class="leading-7 text-sm text-gray-600">魚の画像を登録</label>
                             <input type="file" id="file" name="file"
                                 class="w-full bg-gray-100 bg-opacity-50 rounded border border-gray-300 focus:border-blue-500 focus:bg-white focus:ring-2 focus:ring-blue-200 text-sm outline-none text-gray-700 py-1 px-3 leading-8 transition-colors duration-200 ease-in-out">
                         </div>
@@ -39,8 +40,8 @@
                     <div class="p-2 w-full">
                         <div class="relative">
                             <span class="text-white bg-red-400 border-0 py-1 px-2 rounded text-sm">必須</span>
-                            <label for="title" class="leading-7 text-sm text-gray-600">魚の種類、匹数</label>
-                            <input type="text" id="title" name="title" placeholder="例) 真鯛、蓮子鯛 計10匹"
+                            <label for="title" class="leading-7 text-sm text-gray-600">タイトル</label>
+                            <input type="text" id="title" name="title" placeholder="魚の種類、匹数を記入。 例) 真鯛、蓮子鯛 計10匹"
                                 class="w-full bg-gray-100 bg-opacity-50 rounded border border-gray-300 focus:border-blue-500 focus:bg-white focus:ring-2 focus:ring-blue-200 text-sm outline-none text-gray-700 py-1 px-3 leading-8 transition-colors duration-200 ease-in-out">
                         </div>
                     </div>
@@ -67,7 +68,7 @@
                     <div class="p-2 w-full">
                         <div class="relative">
                             <span class="text-white bg-red-400 border-0 py-1 px-2 rounded text-sm">必須</span>
-                            <label for="place_1" class="leading-7 text-sm text-gray-600">引渡し日時/場所①</label>
+                            <label for="place_1" class="leading-7 text-sm text-gray-600">引渡し希望日時/場所①</label>
                             <input type="datetime-local" id="datetime_1" name="datetime_1"
                                 class="w-5/6 bg-gray-100 bg-opacity-50 rounded border border-gray-300 focus:border-blue-500 focus:bg-white focus:ring-2 focus:ring-blue-200 text-sm outline-none text-gray-700 py-1 px-3 leading-8 transition-colors duration-200 ease-in-out">
                             <input type="text" id="place_1" name="place_1" placeholder="例) ◯◯市/◯◯漁港"
@@ -77,7 +78,7 @@
                     <div class="p-2 w-full">
                         <div class="relative">
                             <span class="text-white bg-blue-400 border-0 py-1 px-2 rounded text-sm">任意</span>
-                            <label for="place_2" class="leading-7 text-sm text-gray-600">引渡し日時/場所②</label>
+                            <label for="place_2" class="leading-7 text-sm text-gray-600">引渡し希望日時/場所②</label>
                             <input type="datetime-local" id="datetime_2" name="datetime_2"
                                 class="w-5/6 bg-gray-100 bg-opacity-50 rounded border border-gray-300 focus:border-blue-500 focus:bg-white focus:ring-2 focus:ring-blue-200 text-sm outline-none text-gray-700 py-1 px-3 leading-8 transition-colors duration-200 ease-in-out">
                             <input type="text" id="place_2" name="place_2" placeholder="例) ◯◯市/◯◯駅周辺"
@@ -87,7 +88,7 @@
                     <div class="p-2 w-full">
                         <div class="relative">
                             <span class="text-white bg-blue-400 border-0 py-1 px-2 rounded text-sm">任意</span>
-                            <label for="place_3" class="leading-7 text-sm text-gray-600">引渡し日時/場所③</label>
+                            <label for="place_3" class="leading-7 text-sm text-gray-600">引渡し希望日時/場所③</label>
                             <input type="datetime-local" id="datetime_3" name="datetime_3"
                                 class="w-5/6 bg-gray-100 bg-opacity-50 rounded border border-gray-300 focus:border-blue-500 focus:bg-white focus:ring-2 focus:ring-blue-200 text-sm outline-none text-gray-700 py-1 px-3 leading-8 transition-colors duration-200 ease-in-out">
                             <input type="text" id="place_3" name="place_3" placeholder="例) ◯◯市/◯◯釣具店周辺"
@@ -109,6 +110,7 @@
                         <div class="relative">
                             <span class="text-white bg-blue-400 border-0 py-1 px-2 rounded text-sm">複数選択可</span>
                             <label for="process" class="leading-7 text-sm text-gray-600"> 締め方/処理</label>
+                            <span class="text-sm text-gray-400">(選択のない場合、初期値で送信されます)</span>
 
                         </div>
                         {{-- 1段目 --}}
@@ -186,6 +188,7 @@
                         <div class="relative">
                             <span class="text-white bg-blue-400 border-0 py-1 px-2 rounded text-sm">選択</span>
                             <label for="cool_now" class="leading-7 text-sm text-gray-600">現在の保冷状態</label>
+                            <span class="text-sm text-gray-400">(選択のない場合、初期値で送信されます)</span>
                             <select id="cool_now" name="cool_now"
                                 class="w-full bg-gray-100 bg-opacity-50 rounded border border-gray-300 focus:border-blue-500 focus:bg-white focus:ring-2 focus:ring-blue-200 text-sm outline-none text-gray-700 py-1 px-3 leading-8 transition-colors duration-200 ease-in-out">
                                 <option value="1" selected>クーラーボックスで冷却中</option>
@@ -204,6 +207,7 @@
                         <div class="relative">
                             <span class="text-white bg-blue-400 border-0 py-1 px-2 rounded text-sm">選択</span>
                             <label for="cool_give" class="leading-7 text-sm text-gray-600">引渡し時の保冷状態</label>
+                            <span class="text-sm text-gray-400">(選択のない場合、初期値で送信されます)</span>
                             <select id="cool_give" name="cool_give"
                                 class="w-full bg-gray-100 bg-opacity-50 rounded border border-gray-300 focus:border-blue-500 focus:bg-white focus:ring-2 focus:ring-blue-200 text-sm outline-none text-gray-700 py-1 px-3 leading-8 transition-colors duration-200 ease-in-out">
                                 <option value="1" selected>クーラーボックスで冷却状態で引渡し場所まで持参します</option>

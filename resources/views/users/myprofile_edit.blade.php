@@ -17,7 +17,8 @@
 
                             {{-- 登録されていた画像を表示 --}}
                             <div>現在登録されている画像</div>
-                            @if (!isset($user_data['file_path']))
+                            @if ($user_data['file_path'] == null)
+                                <p class="text-xs">プロフィール画像が登録されていません</p>
                                 <div
                                     class="w-20 h-20 rounded-full inline-flex items-center justify-center bg-gray-200 text-gray-400">
                                     <svg fill="none" stroke="currentColor" stroke-linecap="round"
@@ -29,7 +30,7 @@
                                 </div>
 
                             @else
-                                <div class="w-40 h-40 rounded-full">
+                                <div class="w-40 h-40 rounded-full object-contain">
                                     <img src="{{ asset('storage/' . $user_data['file_path']) }}"
                                         alt="{{ asset('storage/' . $user_data['file_path']) }}">
                                 </div>

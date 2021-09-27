@@ -55,22 +55,31 @@
                                                             </div>
                                                         </div>
                                                         <div class="w-full flex flex-row">
-                                                            <div class="w-1/10 ml-4 mr-1">
-                                                                <input
-                                                                    class="focus:border-blue-500 focus:bg-white focus:ring-2 focus:ring-blue-200"
-                                                                    type="radio" name="pickup" value="2">
-                                                            </div>
+
+                                                            @if ($item['datetime_2'] == null)
+                                                                {{-- radioボタン表示しない --}}
+                                                            @else
+                                                                <div class="w-1/10 ml-4 mr-1">
+                                                                    <input
+                                                                        class="focus:border-blue-500 focus:bg-white focus:ring-2 focus:ring-blue-200"
+                                                                        type="radio" name="pickup" value="2">
+                                                                </div>
+                                                            @endif
                                                             <div class="leading-relaxed text-lg mb-4 w-9/10">
                                                                 <p>{{ $item['datetime_2'] }}</p>
                                                                 <p>{{ $item['place_2'] }}</p>
                                                             </div>
                                                         </div>
                                                         <div class="w-full flex flex-row">
-                                                            <div class="w-1/10 ml-4 mr-1">
-                                                                <input
-                                                                    class="focus:border-blue-500 focus:bg-white focus:ring-2 focus:ring-blue-200"
-                                                                    type="radio" name="pickup" value="3">
-                                                            </div>
+                                                            @if ($item['datetime_3'] == null)
+                                                                {{-- radioボタン表示しない --}}
+                                                            @else
+                                                                <div class="w-1/10 ml-4 mr-1">
+                                                                    <input
+                                                                        class="focus:border-blue-500 focus:bg-white focus:ring-2 focus:ring-blue-200"
+                                                                        type="radio" name="pickup" value="2">
+                                                                </div>
+                                                            @endif
                                                             <div class="leading-relaxed text-lg mb-4 w-9/10">
                                                                 <p>{{ $item['datetime_3'] }}</p>
                                                                 <p>{{ $item['place_3'] }}</p>

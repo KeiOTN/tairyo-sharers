@@ -19,6 +19,7 @@ class CreateMessagesTable extends Migration
             $table->integer('from');  //送信者
             $table->integer('to'); // 受信者
             $table->string('message'); // 本文
+            $table->datetime('read')->default(null); //既読
             $table->timestamps();
         });
     }

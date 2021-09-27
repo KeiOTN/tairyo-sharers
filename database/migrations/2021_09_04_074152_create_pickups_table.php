@@ -18,10 +18,10 @@ class CreatePickupsTable extends Migration
             $table->integer('fish_id');  // =content tableのidと同じ
             $table->integer('pickup_user_id'); // 希望者
             $table->integer('pickup'); // 受取条件番号
-            $table->string('pickup_detail')->nullable(); // textarea
-            $table->string('result')->nullable(); // 結果番号
-            $table->string('is_answered')->nullable(); // 回答済
-            $table->string('is_expired')->nullable(); //申込期限切れ
+            $table->string('pickup_detail')->default(null); // textarea
+            $table->string('result')->default(null); // 結果番号
+            $table->string('is_answered')->default(null); // 回答済
+            $table->string('is_expired')->default(null); //申込期限切れ
             $table->timestamps();
         });
     }

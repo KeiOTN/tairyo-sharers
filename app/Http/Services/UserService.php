@@ -30,7 +30,6 @@ class UserService
                 'comment' => $request->comment,
                 'giver' => $request->giver,
                 'receiver' => $request->receiver
-
             ]);
 
         return;

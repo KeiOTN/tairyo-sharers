@@ -49,6 +49,11 @@
                             {{ __('受取リクエスト中/出品中一覧') }}
                         </x-dropdown-link>
 
+                        <x-dropdown-link onClick="href='{{ route('like_list') }}'">
+                            {{ __('お気に入り') }}
+                        </x-dropdown-link>
+
+
                         <x-dropdown-link onClick="href='{{ route('history_and_evaluation') }}'">
                             {{ __('取引履歴/評価(未)') }}
                         </x-dropdown-link>
@@ -124,6 +129,8 @@
             <x-responsive-nav-link onClick="href='{{ route('input') }}'">{{ __('出品する(魚の貰い手を探す)') }}
             </x-responsive-nav-link>
             <x-responsive-nav-link onClick="href='{{ route('now_on_deal') }}'">{{ __('受取リクエスト中/出品中一覧') }}
+            </x-responsive-nav-link>
+            <x-responsive-nav-link onClick="href='{{ route('like_list') }}'">{{ __('お気に入り') }}
             </x-responsive-nav-link>
             <x-responsive-nav-link onClick="href='{{ route('history_and_evaluation') }}'">{{ __('取引履歴/評価(未)') }}
             </x-responsive-nav-link>

@@ -7,7 +7,8 @@
 </head>
 
 <body>
-    <div class="h-25 m-4" onClick="location.href='{{ route('pickup_guide') }}'">
+    <div class="h-25 m-4 flex justify-center items-center flex-col"
+        onClick="location.href='{{ route('pickup_guide') }}'">
         <img src="{{ asset('image/pickup-guide.png') }}" alt="受け取りガイド">
         <p class="lg:w-2/3 mx-auto leading-relaxed text-sm text-center text-gray-900">↑魚の受け取り応募方法はこちらをcheck!</p>
     </div>

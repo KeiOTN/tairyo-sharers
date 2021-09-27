@@ -14,10 +14,18 @@
                     You're logged in!
                 </div> --}}
                 <button onClick="location.href='{{ route('input') }}'"
-                    class="flex text-white bg-red-500 border-0 py-2 px-8 focus:outline-none hover:bg-red-600 rounded text-lg m-4 shadow-md">
-                    魚をあげたい</button>
-                <button onClick="location.href='{{ route('output') }}'"
-                    class="flex text-white bg-blue-500 border-0 py-2 px-8 focus:outline-none hover:bg-blue-600 rounded text-lg m-4 shadow-md">魚がほしい</button>
+                    class="flex text-white  border-0 py-2 px-8 focus:outline-none 
+                    {{-- bg-blue-500 hover:bg-blue-600 --}}
+                    rounded text-md m-4 shadow-md
+                    bg-gradient-to-r from-green-400 to-blue-500">
+                    魚をあげたい人</button>
+                <button onClick="
+                    location.href='{{ route('output') }}'"
+                    class="
+                    flex text-white border-0 py-2 px-8 focus:outline-none 
+                    {{-- bg-red-500 hover:bg-red-600 --}}
+                   bg-gradient-to-r from-purple-400 via-pink-500 to-red-500
+                    rounded text-md m-4 shadow-md">魚がほしい人</button>
             </div>
             {{-- </div> --}}
             {{-- 登録されている魚一覧 --}}

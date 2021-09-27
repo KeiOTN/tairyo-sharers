@@ -72,7 +72,7 @@ exit();
                                     <div class="w-full flex flex-row text-center  justify-around items-center">
                                         <button type="submit" name="result" value="1"
                                             class="w-32 m-2 px-4 
-                                            text-white bg-yellow-500 border-0 py-2 focus:outline-none hover:bg-yello-600 rounded text-xs">
+                                            text-white bg-blue-500 border-0 py-2 focus:outline-none hover:bg-blue-600 rounded text-xs">
                                             この人にあげる！
                                         </button>
                                         <button type="submit" name="result" value="2"
@@ -103,15 +103,15 @@ exit();
                                     <p class="text-gray-500 text-xs">受け取り希望場所:
                                         @if ($pickup->pickup <= 3)
                                             <?php $num_key1 = 'place_' . $pickup->pickup; ?>
-                                            {{ $pickup->$num_key1 }}
+                                            {{ $content->$num_key1 }}
                                         @elseif($pickup->pickup=4)
-                                            {{ $pickup->pickup_detail }}
+                                            {{ $content->pickup_detail }}
                                         @endif
                                     </p>
                                     <p class="text-gray-500 text-xs">受け取り希望時間:
                                         @if ($pickup->pickup <= 3)
                                             <?php $num_key2 = 'datetime_' . $pickup->pickup; ?>
-                                            {{ $pickup->$num_key2 }}
+                                            {{ $content->$num_key2 }}
                                         @elseif($pickup->pickup=4)
                                             要相談
                                         @endif
@@ -312,9 +312,9 @@ exit();
                                 受け取り場所:<br>
                                 候補1: {{ $content['datetime_1'] }}{{ $content['place_1'] }}<br>
                                 候補2:
-                                {{ $content['datetime_2'] ? $content['datetime_2'] : 'なし' }}{{ $content['place_2'] ? $content['place_2'] : 'なし' }}<br>
+                                {{ $content['datetime_2'] ? $content['datetime_2'] : '登録なし' }}{{ $content['place_2'] ? $content['place_2'] : '' }}<br>
                                 候補3:
-                                {{ $content['datetime_3'] ? $content['datetime_3'] : 'なし' }}{{ $content['place_3'] ? $content['place_3'] : 'なし' }}
+                                {{ $content['datetime_3'] ? $content['datetime_3'] : '登録なし' }}{{ $content['place_3'] ? $content['place_3'] : '' }}
                             </h2>
                             <h2 class="tracking-widest text-xs title-font font-medium text-gray-900 mb-1">
                                 詳細:

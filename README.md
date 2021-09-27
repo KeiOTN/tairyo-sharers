@@ -35,12 +35,18 @@
 - profile写真 編集機能 実装
 - detail, each_requestにstatus表示実装
 
-## 9/24 will
-- contentの編集/削除 実装
-- お知らせ画面 実装
+## 9/24 commit
+- プロフィール編集のバグ修正
+
+## 9/27 commit
+- button color修正
+- input画面レイアウト編集
+
 
 ## will list 優先順位
 必須
+- contentの編集/削除 実装
+- お知らせ画面 実装
 - デプロイ試行
 - 返信のflash通知
 - formバリデーション

@@ -76,6 +76,17 @@ exit();
                                                                     </p>
                                                                 </div>
                                                             </div>
+                                                            <div class="flex justify-center md:w-1/3">
+                                                                <?php $pickup_id = $pickup->pickups_id; ?>
+                                                                <div onClick="location.href='{{ route('each_request', ['pickup_id' => $pickup_id]) }}'"
+                                                                    style="background:#0CBF00"
+                                                                    class="m-2 w-3  flex mx-auto
+                                                                    text-white  border-0 py-2 px-8 focus:outline-none 
+                                                                    {{-- bg-green-500 hover:bg-green-600 --}}
+                                                                    rounded
+                                                                    text-xs">
+                                                                    詳細をみる</div>
+                                                            </div>
                                                             <div class="flex flex-row text-center md:w-2/5">
 
                                                                 <form action="{{ route('result_save') }}"
@@ -93,7 +104,7 @@ exit();
                                                                     <div class="flex flex-row text-center">
                                                                         <button type="submit" name="result" value="1"
                                                                             class="w-32 m-2 px-4 
-                                            text-white bg-yellow-500 border-0 py-2 focus:outline-none hover:bg-yello-600 rounded text-xs">
+                                            text-white bg-blue-500 border-0 py-2 focus:outline-none hover:bg-blue-600 rounded text-xs">
                                                                             この人にあげる！
                                                                         </button>
                                                                         <button type="submit" name="result" value="2"
@@ -104,13 +115,7 @@ exit();
                                                                     </div>
                                                                 </form>
                                                             </div>
-                                                            <div class="flex justify-center md:w-1/3">
-                                                                <?php $pickup_id = $pickup->pickups_id; ?>
-                                                                <div onClick="location.href='{{ route('each_request', ['pickup_id' => $pickup_id]) }}'"
-                                                                    class="m-2 w-32
-                                            flex mx-auto text-white bg-blue-400 border-0 py-2 px-8 focus:outline-none hover:bg-blue-500 rounded text-xs">
-                                                                    詳細をみる</div>
-                                                            </div>
+
                                                         </div>
                                                     </div>
                                                 @endforeach
@@ -333,13 +338,24 @@ $answered_count = $count_total - $count;
                                                 <p
                                                     class="tracking-widest text-xs title-font font-medium text-gray-400 mb-1ß">
                                                     1匹の大きさ、重さ(だいたい)
-                                                </p>{{ $item['size'] }}
+                                                </p>
+                                                @if ($item['size'] == null)
+                                                    登録情報がありません
+                                                @else
+                                                    {{ $item['size'] }}
+                                                @endif
                                             </div>
                                             <div class="leading-relaxed text-lg mb-4">
                                                 <p
                                                     class="tracking-widest text-xs title-font font-medium text-gray-400 mb-1ß">
                                                     釣った場所(おおまかに)
-                                                </p>{{ $item['fishing_area'] }}
+                                                </p>
+                                                @if ($item['fishing_area'] == null)
+                                                    登録情報がありません
+                                                @else
+                                                    {{ $item['fishing_area'] }}
+                                                @endif
+
                                             </div>
                                             <div class="leading-relaxed text-lg mb-4">
                                                 <p
@@ -354,15 +370,29 @@ $answered_count = $count_total - $count;
                                                     class="tracking-widest text-xs title-font font-medium text-gray-400 mb-1">
                                                     引渡し日時/場所②
                                                 </p>
-                                                <p>{{ $item['datetime_2'] }}</p>
-                                                <p>{{ $item['place_2'] }}</p>
+                                                <p>
+                                                    @if ($item['datetime_2'] == null)
+                                                        選択肢が登録されていません
+                                                    @else
+                                                        {{ $item['datetime_2'] }}
+                                                    @endif
+                                                </p>
+                                                <p>
+                                                    {{ $item['place_2'] }}
+                                                </p>
                                             </div>
                                             <div class="leading-relaxed text-lg mb-4">
                                                 <p
                                                     class="tracking-widest text-xs title-font font-medium text-gray-400 mb-1">
                                                     引渡し日時/場所③
                                                 </p>
-                                                <p>{{ $item['datetime_3'] }}</p>
+                                                <p>
+                                                    @if ($item['datetime_3'] == null)
+                                                        選択肢が登録されていません
+                                                    @else
+                                                        {{ $item['datetime_3'] }}
+                                                    @endif
+                                                </p>
                                                 <p>{{ $item['place_3'] }}</p>
                                             </div>
                                             <div class="leading-relaxed text-lg mb-4">
@@ -523,9 +553,10 @@ $answered_count = $count_total - $count;
 
                                             @else
                                                 <div
-                                                    class="w-20 h-20 rounded-full inline-flex items-center justify-center bg-gray-200 text-gray-400">
+                                                    class="w-20 h-20 rounded-full inline-flex items-center justify-center ">
                                                     <img src="{{ asset('storage/' . $created_user_data['file_path']) }}"
-                                                        alt="{{ asset('storage/' . $created_user_data['file_path']) }}">
+                                                        alt="{{ asset('storage/' . $created_user_data['file_path']) }}"
+                                                        class="object-cover rounded-full shadow-xl">
                                                 </div>
                                             @endif
 
