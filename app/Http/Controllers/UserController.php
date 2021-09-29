@@ -18,12 +18,60 @@ class UserController extends Controller
     public function info()
     {
         // お知らせ画面
-        $user_data =  UserService::get_profile(Auth::id());
+        // $user_data =  UserService::get_profile(Auth::id());
         // $user_get_query = User::select('*');
         // $user_data = $user_get_query->find($user_id)->toArray();
 
+        // -- 新着メッセージの通知を出す --
+        // way1:受取リクエストした魚のメッセージ
+        $own_requests = DB::table('pickups')
+            ->join('messages', 'messages.pickup_id', '=', 'pickups.id')
+            ->join('users', 'users.id', '=', 'messages.from')
+            ->select('pickups.id as pickups_id', 'messages.id as messages_id', 'users.name as from_name', 'message')
+            ->where('pickups.pickup_user_id', '=', Auth::id())
+            ->where('messages.from', '!=', Auth::id())
+            ->where('messages.read', '=', null)
+            ->get();
+        // messages tableからmessages.pickup_idで検索
+        // pickups tableからpickup_user_id == Auth::id()のものを検索
+        // from == Auth::id()を除外
+        // 既読(read == 1)を除外
+        // nameさんから新着メッセージがありますを表示
+        // お知らせクリックで既読にdatetime挿入
+
+
+
+        // way2:出品した魚にきたメッセージ
+        $own_contents = DB::table('contents')
+            ->join('pickups', 'pickups.fish_id', '=', 'contents.id')
+            ->join('messages', 'messages.pickup_id', '=', 'pickups.id')
+            ->join('users', 'users.id', '=', 'messages.from')
+            ->select('pickups.id as pickups_id', 'messages.id as messages_id', 'contents.id as contents_id', 'users.name as from_name', 'message', 'title')
+            ->where('contents.created_user_id', '=', Auth::id())
+            ->where('messages.from', '!=', Auth::id())
+            ->where('messages.read', '=', null)
+            ->get();
+
+        // contents tableのcreated_user_id == Auth::id()のものを検索
+        // pickupsからfish_idに該当するものがあるか
+        // messages tableからfish_idに該当するものがあるか
+        // from == Auth::id()を除外
+        // 既読でない(read==null)
+        // titleにnameさんから新着メッセージがありますを表示
+        // お知らせクリックで既読にdatetime挿入
+
+
+
+
+
+
+
+
+
         return view('users.info', [
-            'user_data' => $user_data,
+            'own_requests' => $own_requests,
+            'own_contents' => $own_contents,
+            // 'user_data' => $user_data,
         ]);
     }
 
@@ -144,8 +192,8 @@ class UserController extends Controller
         // 受取募集中の魚
         $contents = DB::table('contents')
             ->where('created_user_id', '=', Auth::id())
-            ->where('is_expired', '=', null)
-            ->where('deleted_at', '=', null)
+            // ->where('is_expired', '=', null)
+            // ->where('deleted_at', '=', null)
             ->get();
         $count1 = count($contents);
 

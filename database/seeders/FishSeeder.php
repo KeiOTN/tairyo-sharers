@@ -276,7 +276,7 @@ class FishSeeder extends Seeder
                 // NO.9
                 'file_name' => '',
                 'file_path' => '',
-                'created_user_id' => '3',
+                'created_user_id' => '4',
                 'title' => 'ブリ5匹',
                 'size' => '50-70cm',
                 'fishing_area' => '鹿児島',
@@ -286,7 +286,7 @@ class FishSeeder extends Seeder
                 'place_2' => 'grape釣具店',
                 'datetime_3' => '2021/09/13 13:13:13',
                 'place_3' => 'nonoスーパー駐車場',
-                'limit' => '2021/09/01 13:00:00',
+                'limit' => '2021/09/14 13:00:00',
                 'process_1' => '1',
                 'process_2' => '',
                 'process_3' => '',

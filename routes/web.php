@@ -81,5 +81,7 @@ Route::get('/like_list', [UserController::class, 'like_list'])->middleware(['aut
 
 
 Route::post('/message_save', [MessageController::class, 'message_save'])->middleware(['auth'])->name('message_save');
+Route::post('/readtime_save_way1', [MessageController::class, 'readtime_save_way1'])->middleware(['auth'])->name('readtime_save_way1');
+Route::post('/readtime_save_way2', [MessageController::class, 'readtime_save_way2'])->middleware(['auth'])->name('readtime_save_way2');
 
 require __DIR__ . '/auth.php';

@@ -80,7 +80,7 @@ exit();
                                                                 <?php $pickup_id = $pickup->pickups_id; ?>
                                                                 <div onClick="location.href='{{ route('each_request', ['pickup_id' => $pickup_id]) }}'"
                                                                     style="background:#0CBF00"
-                                                                    class="m-2 w-3  flex mx-auto
+                                                                    class="w-32 m-2 w-3  flex mx-auto
                                                                     text-white  border-0 py-2 px-8 focus:outline-none 
                                                                     {{-- bg-green-500 hover:bg-green-600 --}}
                                                                     rounded

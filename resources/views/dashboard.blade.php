@@ -51,6 +51,10 @@
                                         受け取り場所:
                                         {{ $item['place_1'] }}/{{ $item['place_2'] }}/{{ $item['place_3'] }}
                                     </h2>
+                                    <h2 class="tracking-widest text-xs title-font font-medium text-gray-400 mb-1">
+                                        出品者:
+                                        {{ $item['created_user_id'] }}
+                                    </h2>
                                     {{-- <p class="leading-relaxed mb-3">{{ $item['content'] }}</p> --}}
                                     <div class="text-right flex-wrap mt-4">
 

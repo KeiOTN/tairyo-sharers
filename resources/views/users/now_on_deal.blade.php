@@ -1,11 +1,5 @@
 {{-- <?php
-use Carbon\Carbon;
-$date1 = new Carbon('2021-05-05');
-$date2 = new Carbon('2021-06-05');
-echo '<pre>';
-var_dump($date1->lt($date2));
-// より小さい
-echo '<pre>';
+var_dump($count1);
 exit();
 ?> --}}
 

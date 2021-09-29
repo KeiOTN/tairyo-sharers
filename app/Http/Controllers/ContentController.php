@@ -211,7 +211,7 @@ class ContentController extends Controller
         $pickup_detail = $request->input('pickup_detail');
         Pickup::create(compact('fish_id', 'pickup_user_id', 'pickup', 'pickup_detail'));
 
-        return view('contents.pickup_request_comfirm');
+        return redirect(route('now_on_deal'));
     }
 
 
