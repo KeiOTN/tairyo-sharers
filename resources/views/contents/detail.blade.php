@@ -155,6 +155,15 @@ exit();
                                                             <div class="flex flex-row text-center w-full md:w-1/2">
                                                                 <div
                                                                     class="flex flex-row items-center justify-center w-full">
+                                                                    <div class="flex justify-center w-full">
+                                                                        <?php $pickup_id = $answer->pickups_id; ?>
+                                                                        <div onClick="location.href='{{ route('each_request', ['pickup_id' => $pickup_id]) }}'"
+                                                                            style="background:#0CBF00"
+                                                                            class="
+                                                                            {{-- bg-blue-400 hover:bg-blue-500 --}}
+                                                                            m-2 w-32 flex mx-auto text-white border-0 py-2 px-8 focus:outline-none  rounded text-xs">
+                                                                            詳細をみる</div>
+                                                                    </div>
                                                                     <div class="w-full p-2 text-left">
                                                                         <p class="text-xs"> 回答した内容</p>
                                                                         <?php
@@ -173,14 +182,8 @@ exit();
                                                                                 onclick="return false;"> お断りする
                                                                         @endif
                                                                     </div>
-                                                                    </button>
-                                                                    <div class="flex justify-center w-full">
-                                                                        <?php $pickup_id = $answer->pickups_id; ?>
-                                                                        <div onClick="location.href='{{ route('each_request', ['pickup_id' => $pickup_id]) }}'"
-                                                                            class="m-2 w-32
-                                            flex mx-auto text-white bg-blue-400 border-0 py-2 px-8 focus:outline-none hover:bg-blue-500 rounded text-xs">
-                                                                            詳細をみる</div>
-                                                                    </div>
+                                                                    {{-- </button> --}}
+
                                                                 </div>
                                                             </div>
                                                         </div>
@@ -223,6 +226,15 @@ $answered_count = $count_total - $count;
                                                             <div class="flex flex-row text-center w-full md:w-1/2">
                                                                 <div
                                                                     class="flex flex-row items-center justify-center w-full">
+                                                                    <div class="flex justify-center w-full">
+                                                                        <?php $pickup_id = $answer->pickups_id; ?>
+                                                                        <div onClick="location.href='{{ route('each_request', ['pickup_id' => $pickup_id]) }}'"
+                                                                            style="background:#0CBF00"
+                                                                            class="
+                                                                            {{-- bg-blue-400 hover:bg-blue-500 --}}
+                                                                            m-2 w-32 flex mx-auto text-white border-0 py-2 px-8 focus:outline-none rounded text-xs">
+                                                                            詳細をみる</div>
+                                                                    </div>
                                                                     <div class="w-full p-2 text-left">
                                                                         <p class="text-xs"> 回答した内容</p>
                                                                         <?php
@@ -241,14 +253,8 @@ $answered_count = $count_total - $count;
                                                                                 onclick="return false;"> お断りする
                                                                         @endif
                                                                     </div>
-                                                                    </button>
-                                                                    <div class="flex justify-center w-full">
-                                                                        <?php $pickup_id = $answer->pickups_id; ?>
-                                                                        <div onClick="location.href='{{ route('each_request', ['pickup_id' => $pickup_id]) }}'"
-                                                                            class="m-2 w-32
-                                            flex mx-auto text-white bg-blue-400 border-0 py-2 px-8 focus:outline-none hover:bg-blue-500 rounded text-xs">
-                                                                            詳細をみる</div>
-                                                                    </div>
+                                                                    {{-- </button> --}}
+
                                                                 </div>
                                                             </div>
                                                         </div>
