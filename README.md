@@ -54,6 +54,9 @@
 - デプロイnull不具合解消
 - button色変更
 
+## 10/1 2nd commit
+- npm run prod実行
+
 
 
 
