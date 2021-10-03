@@ -44,6 +44,7 @@
                                     <img src="{{ asset('storage/images/' . $item['id']) }}"
                                         alt="{{ asset('storage/images/' . $item['id']) }}">
                                 </div>
+
                                 <div class="p-6">
                                     <h1 class="title-font text-lg font-medium text-gray-900 mb-3">
                                         {{ $item['title'] }}</h1>

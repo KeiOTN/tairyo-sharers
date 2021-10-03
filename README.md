@@ -57,6 +57,11 @@
 ## 10/1 2nd commit
 - npm run prod実行
 
+## 10/4 commit
+- sqlバックアップ作成
+- いいね機能作成中(ajax)
+- 諸々調査中にてあまり進捗なし
+
 
 
 

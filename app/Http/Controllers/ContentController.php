@@ -79,6 +79,7 @@ class ContentController extends Controller
                 // exit;
             }
         }
+
         return redirect(route('now_on_deal'))->with('status', '魚の登録が完了しました');
     }
 

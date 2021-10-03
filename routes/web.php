@@ -76,6 +76,7 @@ Route::get('/setting', [UserController::class, 'setting'])->middleware(['auth'])
 Route::get('/terms_of_service', [UserController::class, 'terms_of_service'])->middleware(['auth'])->name('terms_of_service');
 Route::get('/help', [UserController::class, 'help'])->middleware(['auth'])->name('help');
 Route::get('/like_list', [UserController::class, 'like_list'])->middleware(['auth'])->name('like_list');
+Route::get('/ajaxuserlike', [UserController::class, 'ajaxuserlike'])->middleware(['auth'])->name('ajaxuserlike');
 
 
 

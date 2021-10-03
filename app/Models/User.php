@@ -21,6 +21,20 @@ class User extends Authenticatable
         return $this->hasOne('App\pickup');
     }
 
+    // いいねされているユーザー
+    public function liked_users()
+    {
+        return $this->hasMany(User::class);
+    }
+
+    // ユーザーがいいねしている投稿(ユーザー)
+    public function likes()
+    {
+        return $this->hasMany(LikeUser::class);
+    }
+
+
+
     /**
      * The attributes that are mass assignable.
      *
