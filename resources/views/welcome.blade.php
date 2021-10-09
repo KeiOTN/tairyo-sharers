@@ -412,20 +412,20 @@
     <div
         class="relative flex items-top justify-center min-h-screen bg-blue bg-blue-100 dark:bg-blue-900 sm:items-center py-4 sm:pt-0">
         @if (Route::has('login'))
-            <div class="hidden fixed top-0 right-0 px-6 py-4 sm:block">
+            <div class="fixed top-0 right-0 px-6 py-4 sm:block">
                 @auth
-                    <a href="{{ url('/dashboard') }}" class="text-sm text-white underline">Top</a>
+                    <a href="{{ url('/dashboard') }}" class="text-sm text-gray-600 underline">Top</a>
                 @else
-                    <a href="{{ route('login') }}" class="text-sm text-white underline">Log in</a>
+                    <a href="{{ route('login') }}" class="text-sm text-gray-600 underline">Log in</a>
 
                     @if (Route::has('register'))
-                        <a href="{{ route('register') }}" class="ml-4 text-sm text-white underline">Register</a>
+                        <a href="{{ route('register') }}" class="ml-4 text-sm text-gray-600 underline">Register</a>
                     @endif
                 @endauth
             </div>
         @endif
-        <div class="w-full">
-            <img src="{{ asset('image/tairyou.jpg') }}" alt="">
+        <div class="w-1/2">
+            <img src="{{ asset('image/fish_circle.png') }}" alt="">
         </div>
 
 

@@ -1,10 +1,3 @@
-{{-- <?php
-echo '<pre>';
-var_dump($item);
-echo '<pre>';
-exit();
-?> --}}
-
 <x-app-layout>
     <x-slot name="header">
         <h2 class=" text-xl text-gray-700 leading-tight">
@@ -326,7 +319,7 @@ $answered_count = $count_total - $count;
 
 
                                     <div class="flex justify-center rounded-lg h-70 overflow-hidden border">
-                                        @if (isset($item['file_path']))
+                                        @if (isset($item['file_name']))
                                             <img src="{{ asset('storage/images/' . $item['id']) }}"
                                                 alt="{{ asset('storage/images/' . $item['id']) }}">
                                         @endif

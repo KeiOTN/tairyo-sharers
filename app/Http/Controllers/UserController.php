@@ -193,7 +193,7 @@ class UserController extends Controller
         $contents = DB::table('contents')
             ->where('created_user_id', '=', Auth::id())
             // ->where('is_expired', '=', null)
-            // ->where('deleted_at', '=', null)
+            ->where('deleted_at', '=', null)
             ->get();
         $count1 = count($contents);
 

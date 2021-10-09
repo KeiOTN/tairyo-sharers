@@ -7,6 +7,7 @@ use App\Models\Pickup;
 use App\Models\User;
 use App\Models\Message;
 use Illuminate\Http\Request;
+use Illuminate\Http\File;
 use Illuminate\Support\Facades\Storage;
 use \DB;
 use \Auth;
@@ -73,7 +74,10 @@ class ContentController extends Controller
                 $content = $request->input('content');
                 $data = Content::create(compact('created_user_id', 'title', 'size', 'fishing_area', 'file_name', 'file_path', 'datetime_1', 'place_1', 'datetime_2', 'place_2', 'datetime_3', 'place_3', 'limit', 'process_1', 'process_2', 'process_3', 'process_4', 'process_5', 'process_6', 'process_7', 'process_8', 'process_9', 'process_10', 'cool_now', 'cool_give', 'content'));
 
+                // 元コード storage/app/public/imagesに保存される
                 $file_path = Storage::putFileAs('/images', $request->file('file'), $data->id, 'public');
+                // テスト
+                // $file_path = Storage::putFileAs('/images', new File($request->file('file')), $data->id, 'public');
             } else {
                 // print('ルート１');
                 // exit;
@@ -190,7 +194,7 @@ class ContentController extends Controller
         $contents_delete_query->findOrFail($request['content_id']); // ソフトデリート
         $contents_delete_query->delete();
 
-        return redirect(route('now_on_deal'));
+        return redirect(route('now_on_deal'))->with('delete_status', '削除しました');
     }
 
     public function pickup_request($content_id)

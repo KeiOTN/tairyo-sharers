@@ -36,7 +36,7 @@ exit();
 
                             {{-- 登録されていた画像を表示 --}}
                             <div>現在登録されている画像</div>
-                            @if ($item['file_path'] == null)
+                            @if (!isset($item['file_name']))
                                 <p class="text-xs">画像が登録されていません</p>
                                 <div
                                     class="w-20 h-20 rounded-full inline-flex items-center justify-center bg-gray-200 text-gray-400">
@@ -46,14 +46,14 @@ exit();
                                         <path d="M20 21v-2a4 4 0 00-4-4H8a4 4 0 00-4 4v2"></path>
                                         <circle cx="12" cy="7" r="4"></circle>
                                     </svg> --}}
-                                    <img src="{{ asset('image/noimage.png') }}" alt="NO IMAGE">
+                                    <img src="{{ asset('image/no_image.png') }}" alt="NO IMAGE">
                                 </div>
 
                             @else
                                 <div class="w-40 h-40 rounded-full object-contain">
-                                    現在の画像を表示
-                                    {{-- <img src="{{ asset('storage/' . $user_data['file_path']) }}"
-                                        alt="{{ asset('storage/' . $user_data['file_path']) }}"> --}}
+                                    {{-- 現在の画像を表示 --}}
+                                    <img src="{{ asset('storage/images/' . $item['id']) }}"
+                                        alt="{{ asset('storage/images/' . $item['id']) }}">
                                 </div>
                             @endif
 
@@ -61,7 +61,8 @@ exit();
                             <div class="p-2 w-full">
                                 <div class="relative">
                                     {{-- <span class="text-white bg-blue-400 border-0 py-1 px-2 rounded text-sm">任意</span> --}}
-                                    <label for="" class="leading-7 text-sm text-gray-600">新しく登録する画像を選択</label>
+                                    <label for=""
+                                        class="leading-7 text-sm text-gray-600">画像を変更して登録する場合、新しい画像を選択(登録は1枚です)</label>
                                     <input type="file" id="file" name="file"
                                         class="w-full bg-gray-100 bg-opacity-50 rounded border border-gray-300 focus:border-blue-500 focus:bg-white focus:ring-2 focus:ring-blue-200 text-sm outline-none text-gray-700 py-1 px-3 leading-8 transition-colors duration-200 ease-in-out">
                                 </div>
@@ -76,18 +77,47 @@ exit();
                             <input type="hidden" name="id" value="{{ $item['id'] }}">
                             <div class="p-2 w-full">
                                 <div class="relative">
+                                    <span class="text-white bg-red-400 border-0 py-1 px-2 rounded text-sm">必須</span>
                                     <label for="title" class="leading-7 text-sm text-gray-600">タイトル</label>
                                     <input type="text" id="title" name="title" value="{{ $item['title'] }}"
-                                        class="w-full bg-gray-100 bg-opacity-50 rounded border border-gray-300 focus:border-blue-500 focus:bg-white focus:ring-2 focus:ring-blue-200 text-base outline-none text-gray-700 py-1 px-3 leading-8 transition-colors duration-200 ease-in-out">
+                                        class="w-full bg-gray-100 bg-opacity-50 rounded border border-gray-300 focus:border-blue-500 focus:bg-white focus:ring-2 focus:ring-blue-200 text-sm outline-none text-gray-700 py-1 px-3 leading-8 transition-colors duration-200 ease-in-out">
                                 </div>
                             </div>
                             <div class="p-2 w-full">
                                 <div class="relative">
-                                    <label for="place_1" class="leading-7 text-sm text-gray-600">引渡し場所①</label>
-                                    <input type="text" id="place_1" name="place_1" value="{{ $item['place_1'] }}"
-                                        class="w-full bg-gray-100 bg-opacity-50 rounded border border-gray-300 focus:border-blue-500 focus:bg-white focus:ring-2 focus:ring-blue-200 text-base outline-none text-gray-700 py-1 px-3 leading-8 transition-colors duration-200 ease-in-out">
+                                    <span class="text-white bg-blue-400 border-0 py-1 px-2 rounded text-sm">任意</span>
+                                    <label for="size" class="leading-7 text-sm text-gray-600">1匹の大きさ、重さ(だいたい)</label>
+                                    <input type="text" id="size" name="size"
+                                        class="w-full bg-gray-100 bg-opacity-50 rounded border border-gray-300 focus:border-blue-500 focus:bg-white focus:ring-2 focus:ring-blue-200 text-sm outline-none text-gray-700 py-1 px-3 leading-8 transition-colors duration-200 ease-in-out"
+                                        value={{ $item['size'] }}>
                                 </div>
                             </div>
+                            <div class="p-2 w-full">
+                                <div class="relative">
+                                    <span class="text-white bg-blue-400 border-0 py-1 px-2 rounded text-sm">任意</span>
+                                    <label for="fishing_area"
+                                        class="leading-7 text-sm text-gray-600">釣った場所(おおまかに)</label>
+                                    <input type="text" id="fishing_area" name="fishing_area"
+                                        class="w-full bg-gray-100 bg-opacity-50 rounded border border-gray-300 focus:border-blue-500 focus:bg-white focus:ring-2 focus:ring-blue-200 text-sm outline-none text-gray-700 py-1 px-3 leading-8 transition-colors duration-200 ease-in-out"
+                                        value={{ $item['fishing_area'] }}>
+                                </div>
+                            </div>
+                            <div class="p-2 w-full">
+                                <div class="relative">
+                                    <span class="text-white bg-red-400 border-0 py-1 px-2 rounded text-sm">必須</span>
+                                    <label for="place_1" class="leading-7 text-sm text-gray-600">引渡し希望日時①</label>
+                                    <br>現在の登録内容: {{ $item['datetime_1'] }}
+                                    <br>変更する場合、日時を選択
+                                    <input type="datetime-local" id="datetime_1" name="datetime_1"
+                                        class="w-5/6 bg-gray-100 bg-opacity-50 rounded border border-gray-300 focus:border-blue-500 focus:bg-white focus:ring-2 focus:ring-blue-200 text-sm outline-none text-gray-700 py-1 px-3 leading-8 transition-colors duration-200 ease-in-out">
+                                    <br>
+                                    <span class="text-white bg-red-400 border-0 py-1 px-2 rounded text-sm">必須</span>
+                                    <label for="place_1" class="leading-7 text-sm text-gray-600">引渡し希望場所①</label>
+                                    <input type="text" id="place_1" name="place_1" value="{{ $item['place_1'] }}"
+                                        class="w-full bg-gray-100 bg-opacity-50 rounded border border-gray-300 focus:border-blue-500 focus:bg-white focus:ring-2 focus:ring-blue-200 text-sm outline-none text-gray-700 py-1 px-3 leading-8 transition-colors duration-200 ease-in-out">
+                                </div>
+                            </div>
+
                             <div class="p-2 w-full">
                                 <div class="relative">
                                     <label for="place_2" class="leading-7 text-sm text-gray-600">引渡し場所②</label>
@@ -95,6 +125,25 @@ exit();
                                         class="w-full bg-gray-100 bg-opacity-50 rounded border border-gray-300 focus:border-blue-500 focus:bg-white focus:ring-2 focus:ring-blue-200 text-base outline-none text-gray-700 py-1 px-3 leading-8 transition-colors duration-200 ease-in-out">
                                 </div>
                             </div>
+                            <div class="p-2 w-full">
+                                <div class="relative">
+                                    <span class="text-white bg-blue-400 border-0 py-1 px-2 rounded text-sm">任意</span>
+                                    <label for="place_2" class="leading-7 text-sm text-gray-600">引渡し希望日時/場所②</label>
+                                    <br>現在の登録日時:
+                                    @if (isset($item['datetime_2']))
+                                        {{ $item['datetime_2'] }}
+                                    @else
+                                        登録なし
+                                    @endif
+                                    <br>新規登録/変更する場合、日時を選択
+                                    <input type="datetime-local" id="datetime_1" name="datetime_1"
+                                        class="w-5/6 bg-gray-100 bg-opacity-50 rounded border border-gray-300 focus:border-blue-500 focus:bg-white focus:ring-2 focus:ring-blue-200 text-sm outline-none text-gray-700 py-1 px-3 leading-8 transition-colors duration-200 ease-in-out">
+                                    <input type="text" id="place_2" name="place_2" value="{{ $item['place_2'] }}"
+                                        class="w-full bg-gray-100 bg-opacity-50 rounded border border-gray-300 focus:border-blue-500 focus:bg-white focus:ring-2 focus:ring-blue-200 text-sm outline-none text-gray-700 py-1 px-3 leading-8 transition-colors duration-200 ease-in-out">
+                                </div>
+                            </div>
+
+
                             <div class="p-2 w-full">
                                 <div class="relative">
                                     <label for="place_3" class="leading-7 text-sm text-gray-600">引渡し場所③</label>

@@ -28,7 +28,7 @@ class CreateContentsTable extends Migration
             $table->string('place_2')->nullable();
             $table->datetime('datetime_3')->nullable();
             $table->string('place_3')->nullable();
-            $table->datetime('limit'); // 申込期限
+            $table->datetime('limit')->nullable();; // 申込期限
             $table->string('process_1')->nullable(); // 締め方
             $table->string('process_2')->nullable();
             $table->string('process_3')->nullable();
