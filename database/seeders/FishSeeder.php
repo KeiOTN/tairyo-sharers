@@ -18,10 +18,10 @@ class FishSeeder extends Seeder
 
             [
                 // NO.1
-                'file_name' => '',
+                'file_name' => 'itoyori.jpeg',
                 'file_path' => '',
                 'created_user_id' => '1',
-                'title' => '真鯛、蓮子鯛10匹',
+                'title' => 'イトヨリ、蓮子鯛10匹',
                 'size' => '20-50cm',
                 'fishing_area' => '玄界灘',
                 'datetime_1' => '2021/09/01 11:11:11',
@@ -50,10 +50,10 @@ class FishSeeder extends Seeder
 
             [
                 // NO.2
-                'file_name' => '',
+                'file_name' => 'aji.jpeg',
                 'file_path' => '',
                 'created_user_id' => '1',
-                'title' => 'ブリ2匹',
+                'title' => '大アジ',
                 'size' => '50-60cm',
                 'fishing_area' => '玄界灘',
                 'datetime_1' => '2021/09/01 11:11:11',
@@ -82,7 +82,7 @@ class FishSeeder extends Seeder
 
             [
                 // NO.3
-                'file_name' => '',
+                'file_name' => 'kindof04.jpeg',
                 'file_path' => '',
                 'created_user_id' => '1',
                 'title' => 'アジ30匹くらい',
@@ -114,10 +114,10 @@ class FishSeeder extends Seeder
 
             [
                 // NO.4
-                'file_name' => '',
+                'file_name' => 'kindof06.jpeg',
                 'file_path' => '',
                 'created_user_id' => '2',
-                'title' => 'ブリ',
+                'title' => 'ブリとかヤズとか全部で10本',
                 'size' => '50-70cm',
                 'fishing_area' => '玄界灘',
                 'datetime_1' => '2021/09/15 11:11:11',
@@ -146,7 +146,7 @@ class FishSeeder extends Seeder
 
             [
                 // No.5
-                'file_name' => '',
+                'file_name' => 'kindof05.jpeg',
                 'file_path' => '',
                 'created_user_id' => '2',
                 'title' => '太刀魚全部で20本',
@@ -178,10 +178,10 @@ class FishSeeder extends Seeder
 
             [
                 // NO.6
-                'file_name' => '',
+                'file_name' => 'kindof02.jpeg',
                 'file_path' => '',
                 'created_user_id' => '2',
-                'title' => 'イトヨリ10匹',
+                'title' => 'ヤズ、ブリmix',
                 'size' => '20-40cm',
                 'fishing_area' => '対馬周辺',
                 'datetime_1' => '2021/09/10 11:11:11',
@@ -210,7 +210,7 @@ class FishSeeder extends Seeder
 
             [
                 // NO.7
-                'file_name' => '',
+                'file_name' => 'kijihata.jpeg',
                 'file_path' => '',
                 'created_user_id' => '3',
                 'title' => 'アコウ8匹',
@@ -242,11 +242,11 @@ class FishSeeder extends Seeder
 
             [
                 // NO.8
-                'file_name' => '',
+                'file_name' => 'tai.jpeg',
                 'file_path' => '',
                 'created_user_id' => '3',
-                'title' => '真鯛、蓮子鯛10匹',
-                'size' => '20-50cm',
+                'title' => '魚種色々 コメントください',
+                'size' => '60cm',
                 'fishing_area' => '鹿児島',
                 'datetime_1' => '2021/09/12 11:11:11',
                 'place_1' => 'super漁港',
@@ -274,10 +274,10 @@ class FishSeeder extends Seeder
 
             [
                 // NO.9
-                'file_name' => '',
+                'file_name' => 'kindof07.jpeg',
                 'file_path' => '',
                 'created_user_id' => '4',
-                'title' => 'ブリ5匹',
+                'title' => 'カワハギ1匹',
                 'size' => '50-70cm',
                 'fishing_area' => '鹿児島',
                 'datetime_1' => '2021/09/13 11:11:11',
