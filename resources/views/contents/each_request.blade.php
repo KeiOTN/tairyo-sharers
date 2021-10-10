@@ -149,73 +149,6 @@ exit();
 
                 </div>
 
-
-
-
-
-                {{-- <div class="p-2 w-full ">
-                    <div class="h-full flex flex-col items-center border-gray-200 border p-4 rounded-lg bg-white">
-                        <div class="w-full flex flex-row">
-                            <div class="flex-grow w-9/10 text-center">
-                                <h2 class="text-gray-900 title-font font-medium">
-                                    {{ $pickup_user->name }}さんから受け取り希望が届いています
-                                </h2>
-                                <p class="text-gray-500 text-xs">受け取り希望場所:
-                                    @if ($pickup->pickup <= 3)
-                                        <?php $num_key1 = 'place_' . $pickup->pickup; ?>
-                                        {{ $content->$num_key1 }}
-                                    @elseif($pickup->pickup=4)
-                                        {{ $content->pickup_detail }}
-                                    @endif
-                                </p>
-                                <p class="text-gray-500 text-xs">受け取り希望時間:
-                                    @if ($pickup->pickup <= 3)
-                                        <?php $num_key2 = 'datetime_' . $pickup->pickup; ?>
-                                        {{ $content->$num_key2 }}
-                                    @elseif($pickup->pickup=4)
-                                        要相談
-                                    @endif
-                                </p>
-                            </div>
-                        </div>
-                        <div class="flex flex-row text-center">
-
-                            <form action="{{ route('result_save') }}" method="POST">
-
-                                @method('put')
-                                @csrf --}}
-
-                {{-- id --}}
-
-                {{-- <input type="hidden" name="id" value="{{ $pickup->id }}"> --}}
-
-                {{-- 回答済み --}}
-
-                {{-- <input type="hidden" name="is_answered" value="1"> --}}
-
-                {{-- getに渡す値 --}}
-
-                {{-- <input type='hidden' name='content_id' value='{{ $pickup->fish_id }}'>
-
-                                <div class="flex flex-row text-center">
-                                    <button type="submit" name="result" value="1"
-                                        class="w-full m-2 px-4 
-                                            text-white bg-yellow-500 border-0 py-2 focus:outline-none hover:bg-yello-600 rounded text-xs">
-                                        この人にあげる！
-                                    </button>
-                                    <button type="submit" name="result" value="2"
-                                        class="w-full m-2 px-4
-                                            text-white bg-red-500 border-0 py-2 focus:outline-none hover:bg-red-600 rounded text-xs">
-                                        お断りする
-                                    </button>
-                                </div>
-                            </form>
-                        </div>
-                    </div>
-                </div> --}}
-
-
-
                 <div class="h-full flex flex-col border-gray-200 border p-4 rounded-lg bg-white m-2"
                     onClick="location.href='{{ route('profile', ['id' => $pickup->pickup_user_id]) }}'">
                     <p class="text-gray-500 text-xs"> 受取希望者情報</p>
@@ -227,7 +160,7 @@ exit();
                             <circle cx="12" cy="7" r="4"></circle>
                         </svg>
                         <h2 class="text-gray-900 title-font font-medium">
-                            {{ $pickup_user->name }} <span class="text-gray-500 text-xs">(取引回数を表示)</span>
+                            {{ $pickup_user->name }} <span class="text-gray-500 text-xs">(取引回数を表示予定)</span>
                         </h2>
                     </div>
                 </div>

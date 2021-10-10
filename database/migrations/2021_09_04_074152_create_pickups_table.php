@@ -20,8 +20,8 @@ class CreatePickupsTable extends Migration
             $table->integer('pickup'); // 受取条件番号
             $table->string('pickup_detail')->nullable(); // textarea
             $table->string('result')->nullable(); // 結果番号
-            $table->string('is_answered')->nullable(); // 回答済
-            $table->string('read')->nullable(); // 既読
+            $table->integer('is_answered')->nullable(); // 回答済
+            $table->datetime('read')->nullable(); // 既読
             $table->string('is_expired')->nullable(); //申込期限切れ
             $table->timestamps();
         });

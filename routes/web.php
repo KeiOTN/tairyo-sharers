@@ -84,5 +84,8 @@ Route::get('/ajaxuserlike', [UserController::class, 'ajaxuserlike'])->middleware
 Route::post('/message_save', [MessageController::class, 'message_save'])->middleware(['auth'])->name('message_save');
 Route::post('/readtime_save_way1', [MessageController::class, 'readtime_save_way1'])->middleware(['auth'])->name('readtime_save_way1');
 Route::post('/readtime_save_way2', [MessageController::class, 'readtime_save_way2'])->middleware(['auth'])->name('readtime_save_way2');
+Route::post('/readtime_save_way3', [MessageController::class, 'readtime_save_way3'])->middleware(['auth'])->name('readtime_save_way3');
+Route::post('/readtime_save_way4', [MessageController::class, 'readtime_save_way4'])->middleware(['auth'])->name('readtime_save_way4');
+
 
 require __DIR__ . '/auth.php';

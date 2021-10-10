@@ -62,6 +62,28 @@ class UserController extends Controller
 
 
 
+        // way3:欲しい！と希望した人への結果が出たよ通知
+        $result_replys = DB::table('pickups')
+            ->join('contents', 'contents.id', '=', 'pickups.fish_id')
+            ->select('contents.id as content_id', 'pickups.id as pickup_id', 'title', 'pickup', 'result', 'datetime_1', 'datetime_2', 'datetime_3', 'place_1', 'place_2', 'place_3', 'pickup_detail')
+            ->where('pickups.is_answered', '=', 1)
+            ->where('pickups.is_expired', '=', null)
+            ->where('pickups.pickup_user_id', '=', Auth::id())
+            ->get();
+        //     pickups tableのis_answered==1 && is_expired==NULL(回答済み, 期限切れではない)のものでpickup_user_id==Auth::id()のものを表示する
+        //     必要な情報  contents.id, contents.title, pickups.pickup 
+        //     resultをconfigから表示
+        //     readにdatetime挿入
+        //     あとで期限切れ処理必要だよ
+
+
+
+        // way4:受け取りリクエストがきたよ！という通知
+        //     pickups tableとcontents tableをpickups.fish_id=contents.idでinnner join
+        //     pickups tableのis_answered==0 && ==Auth::id()(自分が投稿したcontentsで未回答のもの)を表示
+
+
+
 
 
 
@@ -71,6 +93,7 @@ class UserController extends Controller
         return view('users.info', [
             'own_requests' => $own_requests,
             'own_contents' => $own_contents,
+            'result_replys' =>  $result_replys,
             // 'user_data' => $user_data,
         ]);
     }

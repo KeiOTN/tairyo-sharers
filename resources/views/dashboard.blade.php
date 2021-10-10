@@ -32,13 +32,18 @@
             <div class="flex flex-wrap">
                 <p class="px-4 text-gray-600 text-md">取引募集中の魚</p>
                 @foreach ($items as $item)
-                    <div class="px-4 py-2 md:w-1/4"
+                    <div class="px-4 py-2 md:w-1/4 w-full "
                         onClick="location.href='{{ route('detail', ['content_id' => $item['id']]) }}'">
                         <div
-                            class="bg-white h-full border-2 border-gray-200 border-opacity-60 rounded-lg overflow-hidden shadow-sm">
+                            class="bg-white h-full border-2 border-gray-200 border-opacity-60 
+                            {{-- rounded-lg --}}
+                            overflow-hidden shadow-sm">
                             @if (isset($item['file_path']))
                                 {{-- block relative flex justify-center --}}
-                                <div class="block relative h-48 rounded overflow-hidden">
+                                <div
+                                    class="block relative h-48 bg-gray-200
+                                    {{-- rounded --}}
+                                     overflow-hidden flex justify-center">
                                     {{-- <img src="{{ asset('storage/' . $item['file_path']) }}"
                                         alt="{{ asset('storage/' . $item['file_path']) }}"> --}}
                                     <img src="{{ asset('storage/images/' . $item['id']) }}"
@@ -49,9 +54,20 @@
                                     <h1 class="title-font text-lg font-medium text-gray-900 mb-3">
                                         {{ $item['title'] }}</h1>
                                     <h2 class="tracking-widest text-xs title-font font-medium text-gray-600 mb-1">
-                                        受け取り場所:
-                                        {{ $item['place_1'] }}/{{ $item['place_2'] }}/{{ $item['place_3'] }}
-                                    </h2>
+                                        受け取り候補1: {{ $item['datetime_1'] }} / {{ $item['place_1'] }}</h2>
+
+                                    @if ($item['datetime_2'] != null)
+                                        <h2 class="tracking-widest text-xs title-font font-medium text-gray-600 mb-1">
+                                            受け取り候補2:{{ $item['datetime_2'] }} / {{ $item['place_2'] }} </h2>
+                                    @else
+                                    @endif
+
+                                    @if ($item['datetime_2'] != null)
+                                        <h2 class="tracking-widest text-xs title-font font-medium text-gray-600 mb-1">
+                                            受け取り候補3:{{ $item['datetime_3'] }} / {{ $item['place_3'] }} </h2>
+                                    @else
+                                    @endif
+
                                     <h2 class="tracking-widest text-xs title-font font-medium text-gray-600 mb-1">
                                         出品者ID:
                                         {{ $item['created_user_id'] }}

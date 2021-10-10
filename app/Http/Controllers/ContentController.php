@@ -179,12 +179,103 @@ class ContentController extends Controller
 
     public function update(Request $request)
     {
-        $content_get_query = Content::select('*');
-        $content_info = $content_get_query->find($request['id']);
+        // $content_get_query = Content::select('*');
+        // $content_info = $content_get_query->find($request['id']);
 
-        $content_info->content = $request['content'];
-        $content_info->save();
-        return redirect(route('output'));
+        // $content_info->content = $request['content'];
+        // $content_info->save();
+        // return redirect(route('output'));
+
+        if ($request->file == null) {
+            // 画像変更なし
+            // $content_info = Content::select('*')
+            //     ->find($request->id); 
+            //上書きする箇所
+            // echo 'route1';
+            // exit();
+            // $request->validate([
+            //     'title' => 'required',
+            //     'datetime_1' => 'required',
+            //     'place_1' => 'required',
+            // ]);
+            Content::where('id', $request->id)
+                ->update([
+                    'title' => $request->title,
+                    'datetime_1' => $request->datetime_1,
+                    'place_1' => $request->place_1,
+                    'datetime_2' => $request->datetime_2,
+                    'place_2' => $request->place_2,
+                    'datetime_3' => $request->datetime_3,
+                    'place_3' => $request->place_3,
+                    'process_1' => $request->process_1,
+                    'process_2' => $request->process_2,
+                    'process_3' => $request->process_3,
+                    'process_4' => $request->process_4,
+                    'process_5' => $request->process_5,
+                    'process_6' => $request->process_6,
+                    'process_7' => $request->process_7,
+                    'process_8' => $request->process_8,
+                    'process_9' => $request->process_9,
+                    'process_10' => $request->process_10,
+                    'cool_now' => $request->cool_now,
+                    'cool_give' => $request->cool_give,
+                    'content' => $request->content,
+                ]);
+            return redirect(route('detail', ['content_id' => $request->id]))->with('status', '登録内容を編集しました');
+        } else {
+            // 画像変更あり
+            // echo 'route2';
+            // exit();
+            $request->validate([
+                // 'title' => 'required',
+                // 'datetime_1' => 'required',
+                // 'place_1' => 'required',
+                'file' => [
+                    // 空でもOk
+                    // 'nullable',
+                    // アップロードされたファイルであること
+                    'file',
+                    // 画像ファイルであること
+                    'image',
+                    // MIMEタイプを指定
+                    'mimes:jpeg,png',
+                ]
+            ]);
+            $file_path = '\/images\/' . $request->id;
+            var_dump($file_path);
+            exit();
+            File::delete('$file_path');
+            Content::where('id', $request->id)
+                ->update([
+                    'file_path' => Storage::putFileAs('/images', $request->file('file'), $request->id, 'public'),
+                    'file_name' => $request->file('file')->getClientOriginalName(),
+                    'title' => $request->title,
+                    'datetime_1' => $request->datetime_1,
+                    'place_1' => $request->place_1,
+                    'datetime_2' => $request->datetime_2,
+                    'place_2' => $request->place_2,
+                    'datetime_3' => $request->datetime_3,
+                    'place_3' => $request->place_3,
+                    'process_1' => $request->process_1,
+                    'process_2' => $request->process_2,
+                    'process_3' => $request->process_3,
+                    'process_4' => $request->process_4,
+                    'process_5' => $request->process_5,
+                    'process_6' => $request->process_6,
+                    'process_7' => $request->process_7,
+                    'process_8' => $request->process_8,
+                    'process_9' => $request->process_9,
+                    'process_10' => $request->process_10,
+                    'cool_now' => $request->cool_now,
+                    'cool_give' => $request->cool_give,
+                    'content' => $request->content,
+                ]);
+            return redirect(route('detail', ['content_id' => $request->id]))->with('status', '登録内容を編集しました');
+        }
+
+        // echo 'route3';
+        // exit();
+        // return redirect(route('detail', ['content_id' => $request->id]))->with('status', '登録内容を編集しました');
     }
 
     public function delete(Request $request)
