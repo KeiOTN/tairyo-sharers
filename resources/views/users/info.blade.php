@@ -19,10 +19,6 @@ exit();
 
                 {{-- 受け取りリクエストがきたよ！という通知 --}}
                 @foreach ($new_requests as $new_request)
-                    {{-- <form action="{{ route('readtime_save_way4') }}" method="post"> --}}
-                    {{-- @csrf --}}
-                    {{-- <input type="hidden" name="id" value="{{ $result_reply->content_id }}"> --}}
-                    {{-- <input type="hidden" name="pickup_id" value="{{ $result_reply->pickup_id }}"> --}}
                     <button class="p-2 w-full"
                         onClick="location.href='{{ route('each_request', ['pickup_id' => $new_request->pickup_id]) }}'">
                         <div class="h-full flex items-center border-gray-200 border p-4 rounded-lg bg-white">
@@ -35,7 +31,8 @@ exit();
                             </svg>
                             <div class="flex-grow">
                                 <h2 class="text-gray-900 title-font font-medium text-left">
-                                    "{{ $new_request->title }}" へ{{ $new_request->name }}さんから受け取りリクエストが届いています
+                                    "{{ $new_request->title }}" へ {{ $new_request->name }}<span
+                                        style="font-size:0.5rem;">さん</span>から受け取り希望が届いています
                                 </h2>
                                 <p class="text-xs text-left">
                                     @if ($new_request->pickup <= 3)
@@ -50,7 +47,6 @@ exit();
                             </div>
                         </div>
                     </button>
-                    {{-- </form> --}}
                 @endforeach
 
                 {{-- 欲しい！と希望した人への結果が出たよ通知 --}}
@@ -123,7 +119,8 @@ exit();
                                 </svg>
                                 <div class="flex-grow">
                                     <h2 class="text-gray-900 title-font font-medium text-left">
-                                        {{ $own_request->from_name }}さんからあなたのリクエストへメッセージが届いています
+                                        {{ $own_request->from_name }}<span
+                                            style="font-size:0.5rem;">さん</span>からあなたのリクエストへメッセージが届いています
                                     </h2>
                                     <p class="text-gray-500 text-xs text-left">{{ $own_request->message }}</p>
                                 </div>
@@ -147,7 +144,8 @@ exit();
                                 </svg>
                                 <div class="flex-grow">
                                     <h2 class="text-gray-900 title-font font-medium text-left">
-                                        {{ $own_content->from_name }}さんから{{ $own_content->title }}にメッセージが届いています
+                                        {{ $own_content->from_name }}<span
+                                            style="font-size:0.5rem;">さん</span>から{{ $own_content->title }}にメッセージが届いています
                                     </h2>
                                     <p class="text-gray-500 text-xs text-left">{{ $own_content->message }}</p>
                                 </div>

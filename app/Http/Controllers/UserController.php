@@ -5,6 +5,7 @@ namespace App\Http\Controllers;
 use App\Models\Content;
 use App\Models\Pickup;
 use App\Models\User;
+use App\Models\Like;
 use Illuminate\Support\Facades\Storage;
 use App\Http\Services\UserService;
 use Carbon\Carbon;
@@ -92,13 +93,6 @@ class UserController extends Controller
         //     pickups tableのis_answered==null && ==Auth::id()(自分が投稿したcontentsで未回答のもの)を表示
 
 
-
-
-
-
-
-
-
         return view('users.info', [
             'own_requests' => $own_requests,
             'own_contents' => $own_contents,
@@ -124,12 +118,19 @@ class UserController extends Controller
     public function profile($id)
     {
         $user_data =  UserService::get_profile($id);
-        // $user_get_query = User::select('*');
-        // $user_data = $user_get_query->find($user_id)->toArray();
+        // いいね状態のチェック(COUNTで件数を取得)
+        $find_like = DB::table('likes')
+            ->where('user_id', '=', Auth::id())
+            ->where('liked_user_id', '=', $id)
+            ->select('id', 'user_id', 'liked_user_id')
+            ->get();
+
+        $like_num = count($find_like);
 
 
         return view('users.profile', [
             'user_data' => $user_data,
+            'like_num' => $like_num,
         ]);
     }
 
@@ -250,6 +251,52 @@ class UserController extends Controller
             'count2' => $count2,
         ]);
     }
+
+    public function like_create(Request $request)
+    {
+        // いいね状態のチェック(COUNTで件数を取得)
+        $find_like = DB::table('likes')
+            ->where('user_id', '=', Auth::id())
+            ->where('liked_user_id', '=', $request->liked_user_id)
+            ->select('id', 'user_id', 'liked_user_id')
+            ->get();
+
+        $like_num = count($find_like);
+
+        // いいねしていれば削除,していなければ追加のSQLを作成
+
+        if ($like_num == 0) {
+            $user_id = $request->input('user_id');
+            $liked_user_id = $request->input('liked_user_id');
+            Like::create(compact('user_id', 'liked_user_id'));
+        } else {
+            DB::table('likes')
+                ->where('user_id', '=', Auth::id())
+                ->where('liked_user_id', '=', $request->liked_user_id)
+                ->select('id', 'user_id', 'liked_user_id')
+                ->delete();
+            // DB::table('likes')
+            //     ->where('user_id', Auth::id())
+            //     ->update([
+            //         'read' => Carbon::now(),
+            //     ]);
+        }
+
+
+        // return redirect(route('profile', [
+        //     'id' => $liked_user_id,
+        // ]));
+        // return redirect()
+        //     ->route('profile', ['id' => $request->liked_user_id])
+        //     ->with([
+        //         'like_num' => $like_num,
+        //     ]);
+
+        // return back($like_num);
+        //return view('users.profile', ['id' => $request->liked_user_id, 'like_num' => $like_num]);
+        return redirect(route('profile', ['id' => $request->liked_user_id]));
+    }
+
 
     public function history_and_evaluation()
     {
