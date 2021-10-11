@@ -16,10 +16,26 @@ exit();
     <div class="py-8">
         <div class="max-w-7xl mx-auto sm:px-6 lg:px-8">
 
+            {{-- メッセージを送信しました --}}
+            @if (session('status'))
+                <div class="p-2 w-full alert alert-success flex justify-center">
+                    <div class="bg-white border-gray-200 border rounded flex p-2 h-full items-center">
+                        <svg fill="none" stroke="currentColor" stroke-linecap="round" stroke-linejoin="round"
+                            stroke-width="3" class="text-blue-500 w-6 h-6 flex-shrink-0 mr-4" viewBox="0 0 24 24">
+                            <path d="M22 11.08V12a10 10 0 11-5.93-9.14"></path>
+                            <path d="M22 4L12 14.01l-3-3"></path>
+                        </svg>
+                        <span class="title-font font-medium">
+                            {{ session('status') }}</span>
+                    </div>
+                </div>
+            @endif
+
             {{-- 出品者の場合 --}}
             @if ($created_user->id == Auth::id())
 
                 <div class="p-2 w-full">
+
 
                     {{-- リクエストに未回答 --}}
                     @if ($pickup->is_answered !== '1')

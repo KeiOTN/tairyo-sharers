@@ -22,7 +22,7 @@ class MessageController extends Controller
         $message = $request->input('message');
         Message::create(compact('from', 'to', 'message', 'pickup_id'));
         // set_message('メッセージを送信しました。');
-        return redirect()->route('each_request', ['pickup_id' => $request->pickup_id]);    // getに渡す値
+        return redirect()->route('each_request', ['pickup_id' => $request->pickup_id])->with('status', 'メッセージを送信しました');    // getに渡す値
     }
 
     public function readtime_save_way1(Request $request)

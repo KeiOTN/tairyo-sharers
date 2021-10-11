@@ -62,7 +62,7 @@ class UserController extends Controller
 
 
 
-        // way3:欲しい！と希望した人への結果が出たよ通知
+        // way3:欲しい！と希望した人へ成立/不成立の結果が出たよ通知
         $result_replys = DB::table('pickups')
             ->join('contents', 'contents.id', '=', 'pickups.fish_id')
             ->select('contents.id as content_id', 'pickups.id as pickup_id', 'title', 'pickup', 'result', 'datetime_1', 'datetime_2', 'datetime_3', 'place_1', 'place_2', 'place_3', 'pickup_detail')
@@ -79,8 +79,17 @@ class UserController extends Controller
 
 
         // way4:受け取りリクエストがきたよ！という通知
+        $new_requests = DB::table('pickups')
+            ->join('contents', 'contents.id', '=', 'pickups.fish_id')
+            ->join('users', 'pickups.pickup_user_id', '=', 'users.id')
+            ->select('contents.id as content_id', 'pickups.id as pickup_id', 'users.id as user_id', 'title', 'pickup', 'datetime_1', 'datetime_2', 'datetime_3', 'place_1', 'place_2', 'place_3', 'pickup_detail', 'name')
+            ->where('pickups.is_answered', '=', null)
+            ->where('contents.created_user_id', '=', Auth::id())
+            ->get();
+
         //     pickups tableとcontents tableをpickups.fish_id=contents.idでinnner join
-        //     pickups tableのis_answered==0 && ==Auth::id()(自分が投稿したcontentsで未回答のもの)を表示
+        //     users tableをusers.id=pickups.pickup_user_idでinnner join
+        //     pickups tableのis_answered==null && ==Auth::id()(自分が投稿したcontentsで未回答のもの)を表示
 
 
 
@@ -94,6 +103,7 @@ class UserController extends Controller
             'own_requests' => $own_requests,
             'own_contents' => $own_contents,
             'result_replys' =>  $result_replys,
+            'new_requests' => $new_requests,
             // 'user_data' => $user_data,
         ]);
     }
