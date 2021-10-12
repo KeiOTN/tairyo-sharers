@@ -93,7 +93,7 @@ class UserSeeder extends Seeder
                 'email' => 'test_user08@example.com',
                 'password' => Hash::make('password123'),
                 'comment' => '自分も釣りするけどなかなか釣れないので、大きな魚を捌いてみたいです',
-                'giver' => '',
+                'giver' => '1',
                 'receiver' => '1',
                 'is_admin' => '',
                 'created_at' => '2021/01/01 11:11:11'

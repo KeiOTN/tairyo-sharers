@@ -89,10 +89,17 @@ class ContentController extends Controller
 
     public function dashboard()
     {
-        $contents_get_query = Content::select('*');
+        $contents_get_query =  DB::table('contents')
+            ->join('users', 'contents.created_user_id', '=', 'users.id')
+            ->select('contents.*', 'users.name')
+            ->whereNull('contents.deleted_at');
+
         $items = $contents_get_query
             ->orderBy('created_at', 'desc') //新規登録順に
             ->get();
+
+        // var_dump($items);
+        // exit;
 
         return view('dashboard', [
             'items' => $items,
