@@ -53,9 +53,9 @@
                                     @endif
 
                                     <h2 class="tracking-widest text-xs title-font font-medium text-gray-600 mb-1">
-                                        出品者ID:
+                                        出品者:
 
-                                        {{ $item->created_user_id }}
+                                        {{ $item->name }}
                                     </h2>
                                     {{-- <p class="leading-relaxed mb-3">{{ $item['content'] }}</p> --}}
                                     {{-- <div class="text-right flex-wrap mt-4">

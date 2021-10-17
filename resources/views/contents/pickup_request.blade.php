@@ -116,9 +116,9 @@
                                                 class="
                                             flex mx-auto my-4 text-white bg-yellow-500 border-0 py-2 px-8 focus:outline-none hover:bg-yellow-600 rounded text-sm">受け取り希望を送信する
                                             </button>
-                                            <p class="leading-relaxed text-lg mb-4 text-red-500 text-center"> <span
+                                            {{-- <p class="leading-relaxed text-lg mb-4 text-red-500 text-center"> <span
                                                     class="tracking-widest text-xs title-font font-medium text-red-500 mb-1 text-right">申込期限:
-                                                </span>{{ $item['limit'] }}</p>
+                                                </span>{{ $item['limit'] }}</p> --}}
                                         </div>
                                     </div>
                                 </div>

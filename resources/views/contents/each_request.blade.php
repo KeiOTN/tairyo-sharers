@@ -38,7 +38,7 @@ exit();
 
 
                     {{-- リクエストに未回答 --}}
-                    @if ($pickup->is_answered !== '1')
+                    @if ($pickup->is_answered !== 1)
 
                         <div
                             class="h-full flex flex-col md:flex-row items-center border-gray-200 border p-4 rounded-lg bg-white">
@@ -108,7 +108,7 @@ exit();
                                                             </div> --}}
                         </div>
                         {{-- リクエストに回答済み --}}
-                    @elseif ($pickup->is_answered == '1')
+                    @elseif ($pickup->is_answered == 1)
                         <div
                             class="h-full flex flex-col md:flex-row items-center border-gray-200 border p-4 rounded-lg bg-white">
                             <div class="w-full flex flex-row md:w-1/2">
